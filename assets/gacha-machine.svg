@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="480" viewBox="0 0 420 480" fill="none">
+  <title>Blue and yellow capsule machine</title>
+  <desc>A little blue capsule machine with a yellow lid, a glass cabinet full of capsules, a turning handle, and an open collection hatch.</desc>
+  <defs>
+    <linearGradient id="glass" x1="107" y1="98" x2="313" y2="242" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" stop-opacity=".91"/>
+      <stop offset="1" stop-color="#D8EDF7" stop-opacity=".83"/>
+    </linearGradient>
+    <linearGradient id="cabinet" x1="99" y1="251" x2="327" y2="391" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#138BDB"/>
+      <stop offset=".6" stop-color="#017ACD"/>
+      <stop offset="1" stop-color="#096AB0"/>
+    </linearGradient>
+    <linearGradient id="yellow" x1="112" y1="60" x2="298" y2="93" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE762"/>
+      <stop offset=".55" stop-color="#FFD600"/>
+      <stop offset="1" stop-color="#F3C900"/>
+    </linearGradient>
+    <clipPath id="glass-clip">
+      <path d="M101 97H319V226C319 237.046 310.046 246 299 246H121C109.954 246 101 237.046 101 226V97Z"/>
+    </clipPath>
+    <g id="capsule-blue">
+      <circle r="23" fill="#FAF9F6" stroke="#075A98" stroke-width="1.8"/>
+      <path d="M-22.9 0A23 23 0 0 1 22.9 0Z" fill="#017ACD"/>
+      <path d="M-22.5 0H22.5" stroke="#075A98" stroke-width="1.6"/>
+      <path d="M-14-9A17 17 0 0 1-5-16" stroke="white" stroke-opacity=".66" stroke-width="3" stroke-linecap="round"/>
+      <path d="M5 16A17 17 0 0 0 14 9" stroke="#D6D2C8" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <g id="capsule-yellow">
+      <circle r="23" fill="#FAF9F6" stroke="#075A98" stroke-width="1.8"/>
+      <path d="M-22.9 0A23 23 0 0 1 22.9 0Z" fill="#FFD600"/>
+      <path d="M-22.5 0H22.5" stroke="#075A98" stroke-width="1.6"/>
+      <path d="M-14-9A17 17 0 0 1-5-16" stroke="white" stroke-opacity=".78" stroke-width="3" stroke-linecap="round"/>
+      <path d="M5 16A17 17 0 0 0 14 9" stroke="#D6D2C8" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <g id="capsule-mix">
+      <circle r="23" fill="#FFD600" stroke="#075A98" stroke-width="1.8"/>
+      <path d="M-22.9 0A23 23 0 0 1 22.9 0Z" fill="#017ACD"/>
+      <path d="M-22.5 0H22.5" stroke="#075A98" stroke-width="1.6"/>
+      <path d="M-14-9A17 17 0 0 1-5-16" stroke="white" stroke-opacity=".66" stroke-width="3" stroke-linecap="round"/>
+      <path d="M5 16A17 17 0 0 0 14 9" stroke="#FFF2A8" stroke-width="2" stroke-linecap="round"/>
+    </g>
+  </defs>
+
+  <!-- The cabinet is deliberately centered on x=210 for the animated overlay. -->
+  <ellipse cx="210" cy="449" rx="142" ry="10" fill="#075A98" fill-opacity=".09"/>
+  <path d="M114 420H153V433C153 436.314 150.314 439 147 439H120C116.686 439 114 436.314 114 433V420Z" fill="#075A98"/>
+  <path d="M267 420H306V433C306 436.314 303.314 439 300 439H273C269.686 439 267 436.314 267 433V420Z" fill="#075A98"/>
+
+  <!-- Glass cabinet and its two thin metal side rails. -->
+  <path d="M91 88H329V231C329 247.569 315.569 261 299 261H121C104.431 261 91 247.569 91 231V88Z" fill="#017ACD" stroke="#075A98" stroke-width="2"/>
+  <path d="M101 97H319V226C319 237.046 310.046 246 299 246H121C109.954 246 101 237.046 101 226V97Z" fill="url(#glass)" stroke="#075A98" stroke-width="1.6"/>
+  <g clip-path="url(#glass-clip)">
+    <path d="M105 221C144 210 194 225 235 217C268 210 292 212 320 223V252H105V221Z" fill="#B9D9EB"/>
+    <use href="#capsule-yellow" transform="translate(155 139) rotate(-27)"/>
+    <use href="#capsule-blue" transform="translate(209 132) rotate(20)"/>
+    <use href="#capsule-mix" transform="translate(265 143) rotate(-18)"/>
+    <use href="#capsule-blue" transform="translate(128 180) rotate(31)"/>
+    <use href="#capsule-mix" transform="translate(180 177) rotate(-24)"/>
+    <use href="#capsule-yellow" transform="translate(235 181) rotate(24)"/>
+    <use href="#capsule-blue" transform="translate(288 186) rotate(-32)"/>
+    <use href="#capsule-yellow" transform="translate(152 219) rotate(-16)"/>
+    <use href="#capsule-blue" transform="translate(208 221) rotate(27)"/>
+    <use href="#capsule-mix" transform="translate(263 224) rotate(-14)"/>
+    <path d="M113 108V164" stroke="white" stroke-opacity=".84" stroke-width="6" stroke-linecap="round"/>
+    <path d="M113 178V190" stroke="white" stroke-opacity=".68" stroke-width="6" stroke-linecap="round"/>
+    <path d="M307 111V151" stroke="white" stroke-opacity=".57" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Cap and small enamel label. -->
+  <rect x="81" y="59" width="258" height="35" rx="17.5" fill="url(#yellow)" stroke="#075A98" stroke-width="2"/>
+  <path d="M99 68H321" stroke="#FFF3AE" stroke-width="3" stroke-linecap="round"/>
+  <rect x="122" y="29" width="176" height="35" rx="9" fill="#017ACD" stroke="#075A98" stroke-width="2"/>
+  <text x="210" y="51" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" letter-spacing="1.35" fill="#FFD600">CURIOUS CAPSULES</text>
+  <circle cx="93" cy="77" r="2" fill="#075A98"/>
+  <circle cx="327" cy="77" r="2" fill="#075A98"/>
+
+  <!-- Main blue casting. -->
+  <path d="M89 244H331V398C331 411.255 320.255 422 307 422H113C99.7452 422 89 411.255 89 398V244Z" fill="url(#cabinet)" stroke="#075A98" stroke-width="2"/>
+  <path d="M99 255V393C99 403.493 107.507 412 118 412" stroke="#51A8E1" stroke-width="3" stroke-linecap="round"/>
+  <path d="M321 258V392C321 403.046 312.046 412 301 412" stroke="#075A98" stroke-opacity=".47" stroke-width="3" stroke-linecap="round"/>
+  <rect x="83" y="237" width="254" height="17" rx="7" fill="#FFD600" stroke="#075A98" stroke-width="2"/>
+
+  <!-- A compact turn handle and coin slot. -->
+  <circle cx="210" cy="296" r="34" fill="#075A98"/>
+  <circle cx="210" cy="293" r="32" fill="#FFD600" stroke="#075A98" stroke-width="2"/>
+  <circle cx="210" cy="293" r="24" stroke="#D3AC00" stroke-width="1.5"/>
+  <path d="M189 304L226 283" stroke="#075A98" stroke-width="14" stroke-linecap="round"/>
+  <path d="M189 301L226 280" stroke="#FAF9F6" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="210" cy="291" r="4" fill="#017ACD"/>
+  <rect x="271" y="276" width="24" height="34" rx="5" fill="#FAF9F6" stroke="#075A98" stroke-width="1.6"/>
+  <path d="M283 283V303" stroke="#075A98" stroke-width="4" stroke-linecap="round"/>
+  <path d="M127 287H148M137.5 276.5V297.5" stroke="#FFD600" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="155" cy="310" r="3" fill="#FFD600"/>
+  <circle cx="111" cy="265" r="2" fill="#075A98"/>
+  <circle cx="309" cy="265" r="2" fill="#075A98"/>
+
+  <!-- Hatch: open area x=177..243, y=344..396; exit center=(210,370). -->
+  <path d="M169 398V368C169 345.356 187.356 327 210 327C232.644 327 251 345.356 251 368V398H169Z" fill="#FFD600" stroke="#075A98" stroke-width="2"/>
+  <path d="M177 396V369C177 350.775 191.775 336 210 336C228.225 336 243 350.775 243 369V396H177Z" fill="#075A98"/>
+  <path d="M177 396V369C177 354.641 185.779 342.331 198.261 337.157C185.934 345.793 182 361.333 182 379V396H177Z" fill="#03436F"/>
+  <path d="M181 391H239" stroke="#3997D0" stroke-width="2" stroke-linecap="round"/>
+  <rect x="165" y="395" width="90" height="8" rx="4" fill="#FFE663" stroke="#075A98" stroke-width="1.6"/>
+  <path d="M119 370H145M132 357V383" stroke="#75B8E4" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M278 359L283 364L278 369M283 364H268" stroke="#FFD600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Broad yellow footplate anchors the object to the page. -->
+  <rect x="79" y="411" width="262" height="20" rx="9" fill="#FFD600" stroke="#075A98" stroke-width="2"/>
+  <path d="M92 417H328" stroke="#FFF1A0" stroke-width="2" stroke-linecap="round"/>
+</svg>
