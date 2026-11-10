@@ -6,56 +6,52 @@
 
   var copy = {
     zh: {
-      title: 'Piko 刘咏乐 | 产品经理实习求职作品集',
-      description: '刘咏乐 Piko，社会工作硕士在读，寻找上海产品经理实习机会。了解我的教育背景、社工实习和手账游戏设计项目。',
-      heroAvailability: '产品经理实习 · 工作意向地：上海',
-      heroLede: '你好，我是刘咏乐 Piko，社会工作专业硕士在读，正在寻找上海的产品经理实习机会。',
-      seeWork: '查看我的实践 →', letsTalk: '联系我',
-      navAbout: '关于我', navEducation: '教育背景', navExperience: '相关经历', navPortfolio: '项目实践', navContact: '联系我 ↗',
-      educationLabel: 'Education', educationTitle: '在学习中，提出', educationEmphasis: '更好的问题', educationEnd: '。',
-      educationIntro: '社会工作硕士在读，本科主修经济学、辅修法学，具备经济学、管理与法律的跨学科知识基础。',
-      experienceLabel: '实习与校内经历', experienceTitle: '在实践中，理解', experienceEmphasis: '人和需求', experienceEnd: '。',
+      title: 'Piko Yongle Liu | 个人作品集',
+      description: 'Piko Yongle Liu 的个人作品集，展示项目实习、社工实践、市集运营实践、白日梦手作房游戏原型和 Encore 活动回访产品设计。',
+      seeWork: '查看我的实践 →',
+      navAbout: '关于我', navExperience: '实习经历', navPractice: '实践经历', navPortfolio: '项目实践',
+      aboutLabel: '关于我', aboutTitle: '语言与', aboutEmphasis: '技能',
+      languageSkills: '语言', englishCET4: '英语四级 · CET-4', englishCET6: '英语六级 · CET-6',
+      aiSkills: 'AI 工具', designSkills: '设计工具',
+      experienceLabel: '实习经历', experienceTitle: '在实践中，理解', experienceEmphasis: '人和需求', experienceEnd: '。',
+      practiceLabel: '实践经历', practiceTitle: '在真实场景中，', practiceEmphasis: '回应需求', practiceEnd: '。',
       portfolioLabel: '项目与实践', portfolioTitle: '从问题出发，', portfolioEmphasis: '动手实践', portfolioEnd: '。',
-      contactLabel: 'Contact', contactTitle: '有个机会，', contactEmphasis: '一起聊聊？',
-      contactIntro: '我是刘咏乐 Piko，正在寻找上海的产品经理实习机会。欢迎通过邮箱联系我。',
-      emailLabel: '邮箱 ↗', footerNote: '保持好奇，继续行动。',
+      footerNote: '保持好奇，继续行动。',
       gachaHint: '点击扭蛋机，给好奇心一点惊喜',
       gachaLabel: '转动扭蛋机，随机抽取一颗扭蛋',
-      mainNav: '主导航', degreeLabel: '学历', filterLabel: '筛选项目',
+      mainNav: '主导航', filterLabel: '筛选项目',
       all: '全部', details: '查看实践细节',
-      gameTools: ['Unity', '鼠标交互', 'AI 协作开发']
+      gameTools: ['Unity', '鼠标交互', 'AI 协作开发'],
+      productTools: ['产品设计', 'HTML 交互原型', 'AI 协作']
     },
     en: {
-      title: 'Piko 刘咏乐 | Product Manager Internship Portfolio',
-      description: 'Piko, a master’s student in Social Work, seeking a product manager internship in Shanghai. Education, social work internships and a journaling game design project.',
-      heroAvailability: 'Seeking a product manager internship · Shanghai',
-      heroLede: 'Hi, I’m Piko (刘咏乐), a master’s student in Social Work seeking a product manager internship in Shanghai.',
-      seeWork: 'Explore my work →', letsTalk: 'Let’s talk',
-      navAbout: 'About', navEducation: 'Education', navExperience: 'Experience', navPortfolio: 'Projects', navContact: 'Say hello ↗',
-      educationLabel: 'Education', educationTitle: 'Learning to ask ', educationEmphasis: 'better questions', educationEnd: '.',
-      educationIntro: 'A master’s student in Social Work with an undergraduate major in Economics and a minor in Law, bringing an interdisciplinary foundation in economics, management and law.',
-      experienceLabel: 'Internships & campus experience', experienceTitle: 'Understanding ', experienceEmphasis: 'people and needs', experienceEnd: '.',
+      title: 'Piko Yongle Liu | Portfolio',
+      description: 'The portfolio of Piko Yongle Liu, featuring project and social work internships, market operations, the Daydream Handjournal game prototype and Encore product design.',
+      seeWork: 'Explore my work →',
+      navAbout: 'About', navExperience: 'Internships', navPractice: 'Practice', navPortfolio: 'Projects',
+      aboutLabel: 'About me', aboutTitle: 'Languages & ', aboutEmphasis: 'skills',
+      languageSkills: 'Languages', englishCET4: 'English · CET-4', englishCET6: 'English · CET-6',
+      aiSkills: 'AI tools', designSkills: 'Design tools',
+      experienceLabel: 'Internships', experienceTitle: 'Understanding ', experienceEmphasis: 'people and needs', experienceEnd: '.',
+      practiceLabel: 'Practical experience', practiceTitle: 'Responding to needs ', practiceEmphasis: 'through practice', practiceEnd: '.',
       portfolioLabel: 'Projects & practice', portfolioTitle: 'Start with questions. ', portfolioEmphasis: 'Learn by doing', portfolioEnd: '.',
-      contactLabel: 'Contact', contactTitle: 'An opportunity ', contactEmphasis: 'worth exploring?',
-      contactIntro: 'I’m Piko (刘咏乐), seeking a product manager internship in Shanghai. Get in touch by email.',
-      emailLabel: 'Email ↗', footerNote: 'Still curious. Still going.',
+      footerNote: 'Still curious. Still going.',
       gachaHint: 'Click the machine for a little surprise',
       gachaLabel: 'Give the capsule machine a spin for a random capsule',
-      mainNav: 'Main navigation', degreeLabel: 'Degree', filterLabel: 'Filter projects',
+      mainNav: 'Main navigation', filterLabel: 'Filter projects',
       all: 'All', details: 'Explore the details',
-      gameTools: ['Unity', 'Mouse interaction', 'AI-assisted development']
+      gameTools: ['Unity', 'Mouse interaction', 'AI-assisted development'],
+      productTools: ['Product design', 'HTML prototype', 'AI collaboration']
     }
   };
 
   var locale = 'zh';
-  var educationIndex = 0;
-  var openJobIndex = 0;
+  var jobState = {openIndex: 0, elements: []};
+  var practiceState = {openIndex: 0, elements: []};
   var activeFilter = 'all';
-  var tabButtons = [];
-  var jobElements = [];
   var filterButtons = [];
-  var tabs = document.getElementById('tabs');
   var jobs = document.getElementById('jobs');
+  var practiceItems = document.getElementById('practice-items');
   var works = document.getElementById('works');
   var filters = document.getElementById('filters');
   var languageToggle = document.getElementById('language-toggle');
@@ -73,61 +69,23 @@
     return node;
   }
 
-  function pickEducation(index) {
-    educationIndex = index;
-    tabButtons.forEach(function (tab, i) {
-      tab.setAttribute('aria-selected', String(i === index));
-      tab.tabIndex = i === index ? 0 : -1;
-    });
-    var entry = profile[locale].education[index];
-    document.getElementById('edu-years').textContent = entry.years;
-    document.getElementById('edu-school').textContent = entry.school;
-    document.getElementById('edu-degree').textContent = entry.degree;
-    document.getElementById('edu-detail').textContent = entry.detail;
-    document.getElementById('edu-panel').setAttribute('aria-labelledby', 'edu-tab-' + index);
-  }
-
-  function renderEducation() {
-    tabs.replaceChildren();
-    tabButtons = profile[locale].education.map(function (entry, index) {
-      var tab = button(entry.label, 'pill tab');
-      tab.id = 'edu-tab-' + index;
-      tab.setAttribute('role', 'tab');
-      tab.setAttribute('aria-controls', 'edu-panel');
-      tab.addEventListener('click', function () { pickEducation(index); });
-      tab.addEventListener('keydown', function (event) {
-        var next = index;
-        if (event.key === 'ArrowRight') next = (index + 1) % tabButtons.length;
-        else if (event.key === 'ArrowLeft') next = (index + tabButtons.length - 1) % tabButtons.length;
-        else if (event.key === 'Home') next = 0;
-        else if (event.key === 'End') next = tabButtons.length - 1;
-        else return;
-        event.preventDefault();
-        pickEducation(next);
-        tabButtons[next].focus();
-      });
-      tabs.appendChild(tab);
-      return tab;
-    });
-    pickEducation(educationIndex);
-  }
-
-  function updateJobs() {
-    jobElements.forEach(function (entry, index) {
-      var open = index === openJobIndex;
+  function updateExperienceGroup(state) {
+    state.elements.forEach(function (entry, index) {
+      var open = index === state.openIndex;
       entry.card.classList.toggle('open', open);
       entry.button.setAttribute('aria-expanded', String(open));
       entry.list.hidden = !open;
     });
   }
 
-  function renderJobs() {
-    jobs.replaceChildren();
-    jobElements = profile[locale].jobs.map(function (entry, index) {
+  function renderExperienceGroup(container, entries, idPrefix, state) {
+    if (!container) return;
+    container.replaceChildren();
+    state.elements = entries.map(function (entry, index) {
       var card = element('div', 'job lift');
       var trigger = button('', 'job-btn');
-      trigger.id = 'job-trigger-' + index;
-      trigger.setAttribute('aria-controls', 'job-points-' + index);
+      trigger.id = idPrefix + '-trigger-' + index;
+      trigger.setAttribute('aria-controls', idPrefix + '-points-' + index);
       var number = element('span', 'job-n', entry.n);
       number.setAttribute('aria-hidden', 'true');
       var heading = element('span', 'job-t');
@@ -138,18 +96,26 @@
       plus.setAttribute('aria-hidden', 'true');
       trigger.append(number, heading, plus);
       var list = element('ul', 'rise');
-      list.id = 'job-points-' + index;
+      list.id = idPrefix + '-points-' + index;
       list.setAttribute('aria-labelledby', trigger.id);
       entry.pts.forEach(function (point) { list.appendChild(element('li', '', point)); });
       trigger.addEventListener('click', function () {
-        openJobIndex = openJobIndex === index ? -1 : index;
-        updateJobs();
+        state.openIndex = state.openIndex === index ? -1 : index;
+        updateExperienceGroup(state);
       });
       card.append(trigger, list);
-      jobs.appendChild(card);
+      container.appendChild(card);
       return {card: card, button: trigger, list: list};
     });
-    updateJobs();
+    updateExperienceGroup(state);
+  }
+
+  function renderJobs() {
+    renderExperienceGroup(jobs, profile[locale].jobs, 'job', jobState);
+  }
+
+  function renderPractices() {
+    renderExperienceGroup(practiceItems, profile[locale].practices || [], 'practice', practiceState);
   }
 
   function pickFilter(kind) {
@@ -258,13 +224,12 @@
     document.getElementById('main-nav').setAttribute('aria-label', text.mainNav);
     document.getElementById('gacha-trigger').setAttribute('aria-label', text.gachaLabel);
     document.querySelector('.gacha').lang = locale === 'zh' ? 'zh-CN' : 'en';
-    tabs.setAttribute('aria-label', text.degreeLabel);
     filters.setAttribute('aria-label', text.filterLabel);
     languageToggle.textContent = locale === 'zh' ? 'English' : '中文';
     languageToggle.lang = locale === 'zh' ? 'en' : 'zh-CN';
     languageToggle.setAttribute('aria-label', locale === 'zh' ? 'Switch to English' : '切换为中文');
-    renderEducation();
     renderJobs();
+    renderPractices();
     renderProjects();
     try { window.localStorage.setItem('piko-language', locale); } catch (error) { /* A stored preference is optional. */ }
   }

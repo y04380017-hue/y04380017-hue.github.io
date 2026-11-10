@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<!--
+Shows: Encore unifies private reunion, personal return preferences, memories and plans.
+Open: double-click this self-contained HTML file; no server or connection is needed.
+Reset: footer 演示控制 > 重置演示; it clears only encore.demo.v1.
+Presenter: footer drawer switches intentions, group format, clock, replies, mutual and check-in.
+Path: keep a stamp > choose format + company > one next invitation > confirm/book > check-in > memories.
+-->
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#fbf1df"><meta name="description" content="Encore｜让一次相遇，有下一次。把纪念、私密意向、下一场邀请与行程收在同一个地方。"><title>Encore｜下一次相见</title><link rel="icon" href="data:,"><style>
+:root{--paper:#fbf1df;--white:#fffaf0;--blue:#873e2d;--ink:#873e2d;--muted:#795f50;--line:#d7bfa3;--yellow:#f2cb54;--green:#f5dfc1;--serif:Georgia,"Songti SC",SimSun,serif;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;--stamp-mask:none;--red:#b84432;--orange:#d9773e;color-scheme:light}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:#eddfca;color:var(--blue);font-family:var(--sans);font-size:13px;line-height:1.7;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;border:0}
+button:disabled{opacity:.42;cursor:default}
+button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #9c7313;outline-offset:4px}
+button{min-height:44px}
+textarea,input{border:1px solid #cbbdb4;background:var(--white);border-radius:0;padding:10px 12px;min-width:0}
+textarea::placeholder{color:#8c7262}
+textarea{resize:vertical;width:100%;min-height:82px;max-height:180px;line-height:1.85}
+input{width:100%;min-height:45px}
+svg{display:block}
+.icon{width:19px;height:19px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.app{position:relative;max-width:440px;min-height:100svh;margin:auto;background:var(--paper);box-shadow:0 0 90px #4b2a160d;isolation:isolate}
+.app:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:10;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23000' filter='url(%23n)' opacity='.6' d='M0 0h180v180H0z'/%3E%3C/svg%3E")}
+.masthead{display:flex;justify-content:space-between;gap:12px;padding:26px 23px 18px;align-items:center}
+.brand{display:flex;gap:10px;align-items:center;background:none;padding:0;text-align:left}
+.brand-en{font:24px/1.15 var(--serif);letter-spacing:-.8px;display:block}
+.brand-cn{display:block;font-size:9px;letter-spacing:.32em;margin-top:5px}
+.mini-capsule{display:flex;align-items:center;border:1px solid #c7b8af;border-radius:20px;padding:0 11px;gap:12px;height:30px;font-size:15px}
+.mini-capsule i{border-left:1px solid #c7b8af;width:20px;font-style:normal;line-height:17px;padding-left:9px}
+.session-bar{display:flex;justify-content:space-between;gap:7px;align-items:center;margin:0 23px;padding:10px 0;border-top:1px solid var(--line);font-size:9px;color:var(--muted)}
+.session-bar button{padding:0;background:none;font-size:10px;color:var(--blue)}
+.clock-line{font-size:9px;color:var(--muted);display:flex;justify-content:space-between;gap:9px;padding:0 23px 9px}
+.demo-data{font-size:8px;white-space:nowrap;letter-spacing:.02em}
+.demo-data:before{content:"";width:4px;height:4px;border-radius:50%;background:#886f5f;display:inline-block;margin-right:5px;vertical-align:middle}
+.nav{display:flex;justify-content:space-between;gap:9px;margin:0 23px;border-bottom:1px solid var(--line)}
+.nav button{display:flex;gap:6px;align-items:center;min-height:49px;padding:8px 0 11px;background:none;border-bottom:2px solid transparent;font-size:10px;color:var(--muted)}
+.nav button[aria-current="page"]{border-bottom-color:var(--blue);color:var(--blue)}
+.nav .n{font:10px var(--serif);width:18px;height:18px;border:1px solid #c0afa4;border-radius:50%;display:grid;place-items:center}
+.nav [aria-current] .n{background:var(--blue);border-color:var(--blue);color:var(--paper)}
+main{padding:28px 23px 20px;min-height:530px}
+h1,h2,h3,p{margin-top:0}
+h1{font:normal 29px/1.5 var(--serif);letter-spacing:.01em;margin-bottom:9px}
+h1:focus{outline:none}
+h2{font:normal 23px/1.5 var(--serif)}
+h3{font:normal 19px/1.5 var(--serif)}
+.eyebrow{display:flex;align-items:center;gap:9px;font-size:9px;letter-spacing:.15em;margin-bottom:10px}
+.eyebrow:before{content:"";height:1px;width:20px;background:currentColor}
+.intro{color:var(--muted);font-size:11px;line-height:1.9;margin-bottom:23px}
+.muted{color:var(--muted)}
+.small{font-size:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:47px;border:1px solid var(--blue);background:var(--blue);color:var(--white);padding:11px 14px;font-size:12px;letter-spacing:.03em;transition:transform .2s,background .2s}
+.btn:not(:disabled):hover{background:#5a290b;transform:translateY(-1px)}
+.btn.secondary{background:none;color:var(--blue);border-color:#c1b0a6}
+.btn.secondary:not(:disabled):hover{background:#e8e4dc}
+.btn.yellow{background:var(--yellow);border-color:var(--yellow);color:var(--blue)}
+.btn .icon{width:16px;height:16px}
+.full{width:100%}
+.actions{display:flex;gap:10px}
+.actions>.btn{flex:1}
+.text-btn{padding:5px 0;background:none;font-size:11px;text-decoration:underline;text-underline-offset:4px;min-height:44px}
+.private-line{display:flex;gap:6px;align-items:center;justify-content:center;color:var(--muted);font-size:9px;margin:12px 0}
+.private-line .icon{width:12px;height:12px}
+.yellow-tag{display:inline-block;background:var(--yellow);padding:3px 8px;font-size:9px;transform:rotate(-3deg);margin-bottom:12px}
+.letter-wrap{position:relative;padding:15px 2px 20px;margin-bottom:13px}
+.tape{position:absolute;top:3px;left:38%;width:91px;height:23px;background:#ddd0b1b5;transform:rotate(-5deg);z-index:3;clip-path:polygon(2% 0,100% 4%,97% 30%,100% 48%,97% 100%,0 94%,3% 60%,0 35%)}
+.letter-paper{position:relative;background:var(--white);padding:25px 22px 18px;box-shadow:0 5px 23px #633c2414;transform:rotate(-1.2deg);overflow:hidden}
+.letter-paper:before{content:"";position:absolute;inset:7px;border:1px solid #dbd1cb;pointer-events:none}
+.postal-head{font-size:8px;letter-spacing:.12em;display:flex;justify-content:space-between;gap:10px;position:relative;z-index:1}
+.postal-head span:last-child{font:10px var(--serif)}
+.letter-to{margin:19px 0 12px;font-size:10px;color:var(--muted)}
+.letter-quote{font:normal 22px/1.8 var(--serif);position:relative;z-index:1;white-space:pre-line;margin-bottom:16px}
+.letter-scene{height:112px;position:relative;margin:0 -22px;overflow:hidden;opacity:.72}
+.letter-scene img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;mix-blend-mode:multiply}
+.letter-scene:before{content:"";position:absolute;inset:0;background:linear-gradient(var(--white),transparent 50%);z-index:1}
+.card-event{position:relative;z-index:2;margin-top:4px;padding-top:11px;border-top:1px solid #dbd1cb}
+.detail{display:flex;gap:8px;align-items:flex-start;font-size:11px;margin-bottom:9px}
+.detail .icon{width:14px;height:14px;margin-top:3px}
+.detail small{font-size:9px;color:var(--muted);display:block;margin-top:2px}
+.deadline{font-size:10px;display:flex;gap:7px;margin:13px 0 0;padding-top:10px;border-top:1px dashed #cbbcb3;align-items:center}
+.deadline .icon{width:13px;height:13px}
+.privacy-rule{margin:16px 0 17px;padding:11px 12px;background:#ebe4df;font-size:10px;line-height:1.9;display:flex;gap:8px}
+.privacy-rule .icon{width:15px;height:15px;margin-top:3px}
+.letter-paper .privacy-rule{background:none;font-size:9px;border-top:1px dashed #cbbcb3;padding:10px 0 0;margin:13px 0 0;gap:6px}
+.own-status{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;display:flex;gap:9px;justify-content:space-between;align-items:center;margin:15px 0;font-size:11px}
+.own-status small{display:block;color:var(--muted);font-size:9px;margin-top:4px}
+.own-status .text-btn{flex:none;font-size:10px}
+.reminder{margin:5px 23px 0;padding:12px;background:#f4dda6;position:relative;font-size:11px}
+.reminder strong{font-weight:500;padding-right:20px;display:block}
+.reminder .text-btn{min-height:32px;font-size:10px}
+.reminder .dismiss{position:absolute;right:5px;top:0;background:none;width:34px;min-height:35px;font-size:18px}
+.workbench{background-color:#e9e3df;background-image:linear-gradient(#9c81710c 1px,transparent 1px),linear-gradient(90deg,#9c81710c 1px,transparent 1px);background-size:23px 23px;position:relative;padding:44px 13px 43px;margin:0 -5px 24px}
+.bench-label{position:absolute;left:12px;top:12px;font-size:8px;letter-spacing:.08em;color:#725c4f}
+.bench-caption{position:absolute;left:10px;right:10px;bottom:12px;font-size:9px;text-align:center;color:#725c4f}
+.memory-paper{position:relative;background:var(--white);padding:17px;width:100%;aspect-ratio:1.43;transform:rotate(-3deg);box-shadow:0 6px 18px #683d2315}
+.memory-head{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #dcd3cd;padding-bottom:9px;font-size:6px;letter-spacing:.07em}
+.memory-head span:last-child{padding-right:26%}
+.memory-content{position:absolute;inset:47px 17px 29px;display:grid;grid-template-columns:43% 57%;align-items:end}
+.memory-scene{height:92%;border-right:1px solid #dbd1cb;padding-right:10px;overflow:hidden;max-height:310px}
+.memory-scene img{width:100%;height:100%;object-fit:cover;object-position:52% center;mix-blend-mode:multiply}
+.memory-text{padding:0 0 5px 12px;min-width:0}
+.memory-text small{display:block;font-size:7px;margin-bottom:9px;color:var(--muted)}
+.memory-note{font:13px/1.9 var(--serif);white-space:pre-wrap;overflow-wrap:anywhere;margin-bottom:10px;min-height:44px}
+.memory-note.empty{font-size:11px;color:#876d5d}
+.memory-lines{height:12px;border-top:1px solid #dfd6d1;border-bottom:1px solid #dfd6d1}
+.memory-foot{position:absolute;bottom:11px;left:17px;right:17px;display:flex;justify-content:space-between;gap:8px;font-size:5px;letter-spacing:.07em}
+.stamp-target{position:absolute;top:11px;right:12px;width:58px;height:73px;transform:rotate(8deg);z-index:2}
+.stamp-placeholder{height:100%;border:1px dashed #b19c8f;display:grid;place-items:center;align-content:center;gap:5px;font-size:7px;background:var(--white);color:#8b7160}
+.stamp-placeholder .icon{width:18px;height:18px}
+.stamp{display:flex;flex-direction:column;height:100%;width:100%;padding:5px;background:var(--white);mask-image:var(--stamp-mask);-webkit-mask-image:var(--stamp-mask);mask-size:100% 100%;-webkit-mask-size:100% 100%}
+.stamp img{width:100%;min-height:0;flex:1;object-fit:fill;border:1px solid #70412470}
+.stamp-type{display:flex;justify-content:space-between;align-items:center;font-size:4px;line-height:1.2;letter-spacing:.04em;margin-top:3px}
+.stamp-type b{font:7px var(--serif)}
+.postmark{display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid var(--blue);border-radius:50%;width:55px;height:55px;position:relative;font-size:5px;line-height:1.7;letter-spacing:.05em;opacity:.7;transform:rotate(-18deg)}
+.postmark:before{content:"";position:absolute;inset:3px;border:1px solid var(--blue);border-radius:50%}
+.postmark b{padding:2px 0;border-top:1px solid;border-bottom:1px solid;font:7px var(--serif)}
+.finished-mark{position:absolute;right:37px;top:59px;z-index:3;pointer-events:none}
+.control-label{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12px;margin:0 0 12px}
+.control-label small{font-size:9px;color:var(--muted)}
+.control-label .n{font:italic 15px var(--serif);margin-right:8px;color:var(--muted)}
+.materials{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.material{background:none;padding:0;text-align:left}
+.material-picture{aspect-ratio:640/420;padding:5px;border:1px solid #cec0b8;background:var(--white)}
+.source-preview{height:100%;width:100%;position:relative}
+.source-preview img{width:100%;height:100%;object-fit:fill;display:block}
+.material[aria-pressed="true"] .material-picture{border:2px solid var(--blue);padding:4px;box-shadow:3px 3px var(--yellow)}
+.material-name{display:flex;justify-content:space-between;align-items:center;font-size:10px;margin-top:8px;gap:7px}
+.selection{width:15px;height:15px;border:1px solid #c4b4aa;border-radius:50%;display:grid;place-items:center;font-size:9px}
+[aria-pressed="true"] .selection{background:var(--blue);color:var(--white);border-color:var(--blue)}
+.crop-guide{position:absolute;top:19.0476%;left:31.25%;width:37.5%;height:71.4286%;border:1px dashed var(--white);outline:1px solid #873e2d60;opacity:0}
+[aria-pressed="true"] .crop-guide{opacity:1}
+.crop-guide:after{content:"取这一角";position:absolute;bottom:0;left:-1px;right:-1px;background:var(--yellow);text-align:center;font-size:7px;white-space:nowrap}
+.transform-status{font-size:10px;color:var(--muted);min-height:42px;padding-top:9px}
+.note-control{border-top:1px solid var(--line);padding-top:16px;margin-top:9px}
+.input-meta{font-size:9px;color:var(--muted);display:flex;justify-content:space-between;gap:10px;margin:6px 0 20px}
+.save-hint{font-size:9px;color:var(--muted);text-align:center;margin:9px 0 0}
+.envelope{position:relative;display:block;width:calc(100% - 6px);margin:19px 3px 23px;text-align:left;height:217px;background:#e8e3d6;border:1px solid #c4b3a9;box-shadow:4px 7px 0 #ded5d0,0 7px 22px #53321e12;overflow:hidden;transform:rotate(-1deg);isolation:isolate;transition:transform .25s}
+.envelope:nth-child(even){transform:rotate(1deg)}
+.envelope:hover{transform:rotate(0deg) translateY(-3px)}
+.envelope:before{content:"";position:absolute;inset:7px;border:1px solid #c8b9af}
+.flap{position:absolute;inset:0 0 auto;width:100%;height:103px;z-index:-1}
+.flap path{fill:#efeadf;stroke:#cbbcb3;stroke-width:1}
+.envelope-label{position:absolute;top:19px;left:22px;font-size:7px;letter-spacing:.1em}
+.envelope-address{position:absolute;left:24px;top:77px}
+.envelope-address small{font-size:9px}
+.envelope-address h2{font-size:22px;margin:4px 0 5px;letter-spacing:.02em}
+.envelope-address p{font-size:9px;color:var(--muted);margin:0}
+.envelope-stamp{position:absolute;top:22px;right:20px;width:45px;height:57px;transform:rotate(7deg)}
+.envelope-seal{position:absolute;right:28px;bottom:27px;border-radius:50%;background:var(--blue);color:var(--paper);font:italic 20px var(--serif);display:grid;place-items:center;width:43px;height:43px;border:3px double #d4c8c0}
+.envelope-open{position:absolute;left:24px;bottom:21px;display:flex;gap:7px;align-items:center;font-size:10px}
+.envelope-open .icon{width:14px;height:14px}
+.collection-stamps{display:flex;justify-content:center;gap:21px;padding:15px 0 24px;margin-bottom:7px;border-bottom:1px solid var(--line)}
+.collection-stamps figure{margin:0;text-align:center}
+.collection-stamps .collected-stamp{width:74px;height:93px;transform:rotate(-5deg);filter:drop-shadow(1px 3px 1px #873e2d20);margin:0 auto 10px}
+.collection-stamps figure:nth-child(even) .collected-stamp{transform:rotate(6deg)}
+.collection-stamps figcaption{font-size:9px}
+.open-heading{display:flex;justify-content:space-between;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:21px;font-size:11px}
+.saved-work{padding:7px 5px 0;margin-bottom:20px}
+.saved-work .memory-paper{transform:rotate(-1deg)}
+.work-meta{display:flex;justify-content:space-between;gap:8px;align-items:center;margin:11px 0 0;font-size:9px;color:var(--muted)}
+.work-meta .text-btn{font-size:10px;display:flex;align-items:center;gap:6px}
+.work-meta .icon{width:13px;height:13px}
+.draft{border:1px dashed #c4b4aa;padding:14px;margin:16px 0 20px;display:flex;align-items:center;gap:12px}
+.draft .icon{width:25px;height:25px}
+.draft div{flex:1}
+.draft p{font-size:11px;margin-bottom:3px}
+.draft small{font-size:9px;color:var(--muted);display:block}
+.draft .text-btn{font-size:10px;flex:none}
+details.photos{border-top:1px solid var(--line);padding-top:4px;margin:12px 0 22px}
+details.photos summary{font-size:10px;cursor:pointer;min-height:44px;display:flex;align-items:center;justify-content:space-between}
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:17px}
+.photo-grid img{width:100%;aspect-ratio:1.52;object-fit:cover}
+.photo-grid figcaption{font-size:9px;margin-top:5px}
+.photo-grid figure{margin:0}
+.activity-card{margin:23px 0 8px;border-top:1px solid #c1b0a6;border-bottom:1px solid #c1b0a6;padding:19px 0}
+.activity-card .kicker{font-size:9px;color:var(--muted);margin-bottom:7px;letter-spacing:.03em}
+.activity-card h3{font-size:21px;margin-bottom:6px}
+.activity-card p{font-size:10px;color:var(--muted);line-height:1.9;margin-bottom:14px}
+.activity-card .btn{font-size:11px}
+.confirmed-panel{background:#ece5e0;padding:17px;margin:14px 0 19px;position:relative}
+.confirmed-panel h3{margin-bottom:7px;font-size:20px;display:flex;gap:9px;align-items:center}
+.confirmed-panel h3 .icon{width:20px;height:20px}
+.confirmed-panel p{font-size:11px;margin-bottom:5px}
+.confirmed-panel small{font-size:9px;color:var(--muted)}
+.confirmed-names{letter-spacing:.04em}
+.status-seal{border:3px double var(--blue);border-radius:50%;width:93px;height:93px;display:flex;align-items:center;justify-content:center;font:normal 22px var(--serif);transform:rotate(-14deg);position:relative}
+.status-seal:after{content:"Threads";position:absolute;bottom:13px;font:8px var(--sans);letter-spacing:.15em}
+.confirmation{position:fixed;z-index:90;pointer-events:none;inset:0;display:grid;place-items:center;background:#fbf1df2b}
+.confirmation .status-seal{width:165px;height:165px;background:#fbf1dfef;border-width:4px;font-size:35px;box-shadow:0 10px 40px #873e2d20;animation:seal-land .65s both}
+.confirmation .status-seal:after{font-size:12px;bottom:24px}
+.host-banner{padding:10px 13px;background:var(--yellow);font-size:10px;margin-bottom:20px}
+.host-status{border-top:1px solid #c8b9b0;border-bottom:1px solid #c8b9b0;padding:18px 0;margin:19px 0 22px}
+.host-status h3{margin-bottom:5px}
+.host-status p{font-size:11px;color:var(--muted);margin-bottom:0}
+.host-form{display:grid;gap:12px}
+.field{display:block;font-size:11px}
+.field span{display:block;margin-bottom:6px}
+.host-form .btn{margin-top:7px}
+.permission-note{font-size:10px;color:var(--muted);line-height:1.9;padding:13px 0}
+.divider{border:0;border-top:1px solid var(--line);margin:23px 0}
+.footer{margin:8px 23px 0;padding:13px 0 18px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:9px}
+.footer span{font:italic 13px var(--serif)}
+.footer button{background:none;display:flex;gap:6px;align-items:center;padding:0;font-size:9px;color:var(--muted)}
+.footer .icon{width:13px;height:13px}
+.storage-warning{font-size:10px;padding:10px 23px;background:#f5e1b2;color:#5e4918}
+.toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,12px);max-width:calc(100% - 32px);width:max-content;padding:13px 18px;background:var(--blue);color:var(--white);font-size:11px;text-align:center;z-index:150;opacity:0;pointer-events:none;transition:transform .2s,opacity .2s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+dialog{padding:0;border:0;background:var(--white);color:var(--blue);width:min(410px,calc(100% - 28px));max-height:calc(100svh - 35px);box-shadow:0 18px 80px #502b1445;overflow-y:auto;overscroll-behavior:contain}
+dialog::backdrop{background:#4e2d1880;backdrop-filter:blur(3px)}
+.modal-inner{padding:23px}
+.modal-top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:17px;font-size:10px;letter-spacing:.1em}
+.close{background:none;width:35px;min-height:44px;font-size:25px;line-height:1;padding:0;margin:-10px -8px -10px 0}
+.modal-inner h2{font-size:26px;margin-bottom:10px}
+.modal-intro{font-size:11px;color:var(--muted);line-height:1.9;margin-bottom:18px}
+.modal-detail{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:17px 0 6px;margin:20px 0}
+.modal-actions{display:grid;gap:10px}
+.modal-actions .text-btn{justify-self:center}
+.share-options{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:17px}
+.share-options button{font-size:11px;background:none;border:1px solid #c6b7ae;padding:10px 5px}
+.share-options button[aria-pressed="true"]{border-color:var(--blue);background:#ece5e1;box-shadow:0 2px var(--yellow)}
+.audience-preview{font-size:10px;line-height:1.9;padding:12px;border:1px solid #d4c9c2;margin:14px 0}
+.share-preview{padding:8px 4px 0}
+.share-preview .memory-paper{transform:none}
+.share-preview+.small{margin:14px 0}
+.drawer{position:fixed;top:auto;bottom:0;max-width:440px;width:100%;max-height:90svh;margin:0 auto;background:var(--paper)}
+.drawer .modal-inner{padding:24px}
+.drawer h2{font-size:25px}
+.drawer-label{font-size:10px;letter-spacing:.08em;color:var(--muted);margin:18px 0 10px}
+.clock-presets{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.clock-presets button{min-height:45px;background:var(--white);border:1px solid #ccbeb5;font-size:10px;padding:8px}
+.presenter-now{background:var(--blue);color:var(--paper);padding:13px 15px;font-size:12px;margin:18px 0}
+.presenter-now small{display:block;font-size:9px;opacity:.8;margin-bottom:3px}
+.sim-person{display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--line);padding:5px 0;font-size:11px}
+.sim-person>span{flex:1}
+.sim-person button{padding:6px 11px;font-size:10px;background:none;border:1px solid #ccbeb5;min-height:38px}
+.presenter-actions{display:grid;gap:9px;margin-top:18px}
+.presenter-actions button{font-size:11px}
+.reset-warning{font-size:10px;color:#764526;line-height:1.9;margin-bottom:18px}
+.floating-stamp{position:fixed;z-index:140;pointer-events:none}
+.empty-note{text-align:center;padding:20px 10px 6px;font-size:11px;color:var(--muted);line-height:1.9}
+@keyframes seal-land{0%{opacity:0;transform:rotate(-25deg) scale(1.7)}65%{opacity:1;transform:rotate(-14deg) scale(.93)}100%{transform:rotate(-14deg) scale(1)}}
+@media(min-width:700px){body{background-image:radial-gradient(#b5a19455 .7px,transparent .7px);background-size:19px 19px}.app{border-left:1px solid #d4c9c2;border-right:1px solid #d4c9c2;min-height:100svh}.masthead{padding-top:31px}}
+@media(max-width:359px){.masthead{padding-inline:18px}.brand-en{font-size:22px}.session-bar{margin-inline:18px}.clock-line{padding-inline:18px}.nav{margin-inline:18px;gap:5px}.nav button{font-size:9px;gap:4px}main{padding:24px 18px 18px}.letter-quote{font-size:20px}.letter-paper{padding-inline:20px}h1{font-size:27px}.memory-note{font-size:12px}.memory-head{font-size:5px}.envelope-address h2{font-size:20px}.clock-line{font-size:8px}.demo-data{font-size:7px}.drawer .modal-inner,.modal-inner{padding:20px}.material-name{font-size:9px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+.fallback-options{display:grid;gap:16px}.fallback-option{border-top:1px solid var(--line);padding-top:16px}.fallback-option h3{font-size:18px;margin-bottom:6px}.fallback-option .yellow-tag{margin-bottom:9px}.private-choices{display:grid;gap:8px;margin:15px 0}.private-person{display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;min-height:46px;padding:10px 13px;border:1px solid var(--line);background:var(--white);font-size:12px}.private-person[aria-pressed="true"]{border-color:var(--blue);background:#f6e5be}.private-person[aria-pressed="true"] .selection{background:var(--blue);color:var(--white)}.answer-switcher{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.answer-switcher button{border:1px solid var(--line);background:var(--white);font-size:10px;padding:8px 3px}.plan-row{border-top:1px solid var(--line);padding:18px 0 8px}.plan-row h3{font-size:20px;margin-bottom:7px}.plan-row p{font-size:11px;color:var(--muted);line-height:1.9}.plan-row small{font-size:10px}.brand-en{font-size:28px;letter-spacing:-.7px}.brand-cn{letter-spacing:.23em}.sim-person button{min-height:44px}
+.brand-cn{color:var(--orange)}.btn:not(.secondary):not(.yellow){background:var(--red);border-color:var(--red)}.postmark,.status-seal{color:var(--red);border-color:var(--red)}.postmark:before{border-color:var(--red)}
+
+.question-block{border-top:1px solid var(--line);padding:22px 0 4px;margin-top:25px}.question-block h2{font-size:23px;margin-bottom:8px}.question-block .intro{margin-bottom:16px}.question-number{font:italic 15px var(--serif);color:var(--red);margin-right:9px}.format-choices{display:grid;gap:9px}.format-choice{display:flex;justify-content:space-between;gap:10px;align-items:center;width:100%;text-align:left;background:var(--white);border:1px solid var(--line);padding:14px;font-size:13px}.format-choice small{display:block;font-size:10px;color:var(--muted);margin-top:4px}.format-choice[aria-pressed="true"]{border-color:var(--red);box-shadow:3px 3px var(--yellow);background:#fff5e1}.format-choice[aria-pressed="true"] .selection{background:var(--red);color:var(--white);border-color:var(--red)}.people-choices{display:grid;grid-template-columns:1fr 1fr;gap:9px}.people-choice{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:46px;background:var(--white);padding:10px 12px;border:1px solid var(--line);font-size:12px}.people-choice[aria-pressed="true"]{border-color:var(--red);background:#f7e4bf}.people-choice[aria-pressed="true"] .selection{background:var(--red);color:var(--white);border-color:var(--red)}.private-footer{font-size:10px;line-height:1.9;color:var(--muted);text-align:center;margin:19px 0 20px;display:flex;gap:8px;align-items:flex-start}.private-footer .icon{width:14px;height:14px;margin-top:3px}.priority-strip{background:var(--yellow);padding:10px 12px;display:flex;justify-content:space-between;gap:8px;font-size:10px;align-items:center;margin:0 0 19px}.priority-strip strong{font-weight:500}.priority-strip span{font-size:9px;white-space:nowrap}.suggestion-card{position:relative;background:var(--white);border:1px solid #d3b899;box-shadow:4px 5px 0 #e9d4b5;padding:19px;margin:4px 0 25px;overflow:hidden}.suggestion-card:before{content:"";position:absolute;inset:6px;border:1px solid #e0ccb1;pointer-events:none}.suggestion-card>*{position:relative}.suggestion-card .yellow-tag{margin-bottom:16px}.suggestion-card h2{font-size:27px;margin-bottom:7px}.suggestion-card .event-subtitle{font-size:12px;color:var(--muted);margin-bottom:15px}.suggestion-card .reason{font-size:11px;color:var(--muted);line-height:1.9;margin:14px 0}.suggestion-art{height:160px;overflow:hidden;margin:0 -19px 17px;border-top:1px solid #e0ccb1;border-bottom:1px solid #e0ccb1;background:#f2d8ae}.suggestion-art img{width:100%;height:100%;object-fit:cover;object-position:50% 52%;mix-blend-mode:multiply}.suggestion-art svg{width:100%;height:100%}.suggestion-card .detail{font-size:11px}.suggestion-card .detail small{font-size:9px}.intensity{display:flex;align-items:center;gap:7px;font-size:10px;margin:12px 0;color:var(--muted)}.intensity .bars{display:flex;gap:3px}.intensity .bars i{display:block;width:12px;height:6px;background:#e5d3b8}.intensity .bars i.on{background:var(--orange)}.intensity b{font-weight:500;color:var(--blue)}.mutual-note{padding:11px 12px;background:#f9e4ba;font-size:12px;margin:12px 0 15px;border-left:3px solid var(--red)}.suggestion-card .actions{gap:8px}.suggestion-card .actions .btn{font-size:11px;padding:10px 9px;white-space:nowrap}.catalog-link{display:block;width:100%;text-align:center;font-size:11px}.interest-topics{display:flex;flex-wrap:wrap;gap:8px;margin:17px 0 20px}.interest-topics button{background:var(--white);border:1px solid var(--line);padding:9px 12px;min-height:44px;font-size:11px}.interest-topics button[aria-pressed="true"]{background:var(--yellow);border-color:var(--red)}.quiet-sun{display:grid;place-items:center;height:125px;position:relative}.quiet-sun span{width:72px;height:72px;background:var(--yellow);border-radius:50%;display:grid;place-items:center;color:var(--red);font:italic 34px var(--serif);border:1px solid var(--orange);outline:1px dashed var(--orange);outline-offset:8px}.quiet-sun:before,.quiet-sun:after{content:"";position:absolute;top:62px;width:44px;border-top:1px solid #c99b6e}.quiet-sun:before{left:35px}.quiet-sun:after{right:35px}.catalog-item{border-top:1px solid var(--line);padding:18px 0}.catalog-item h3{font-size:22px;margin-bottom:5px}.catalog-item p{font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.8}.catalog-item .intensity{margin:8px 0 13px}.catalog-item .btn{min-height:44px;font-size:11px}.series-goal{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin:20px 0 22px}.series-goal .goal-top{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:11px}.series-goal strong{font:26px var(--serif);color:var(--red)}.series-goal strong small{font:12px var(--sans);color:var(--muted)}.goal-track{display:flex;gap:5px;margin-top:12px}.goal-track i{height:5px;flex:1;background:#e3cfb0}.goal-track i.filled{background:var(--red)}.stamp-book{display:grid;grid-template-columns:1fr 1fr;gap:17px 13px;margin-bottom:30px}.stamp-slot{position:relative;min-height:172px;border:1px solid #d3ba97;background:#fff8e9;padding:16px 10px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.stamp-slot.filled{background:var(--white);box-shadow:2px 3px 0 #ead4b0}.stamp-slot .slot-stamp{width:73px;height:94px;transform:rotate(-6deg);margin:0 0 12px;filter:drop-shadow(1px 2px 1px #873e2d20)}.stamp-slot:nth-child(even) .slot-stamp{transform:rotate(6deg)}.stamp-slot .slot-empty{width:67px;height:86px;border:1px dashed #c1996d;display:grid;place-items:center;margin-bottom:12px;color:#a16c49}.stamp-slot .slot-empty .icon{width:27px;height:27px;opacity:.7}.stamp-slot b{font-size:11px;font-weight:500;display:block}.stamp-slot small{font-size:8px;color:var(--muted);margin-top:4px;display:block}.slot-kicker{font-size:8px;letter-spacing:.12em;position:absolute;top:8px;left:10px;color:#a37650}.section-label{display:flex;justify-content:space-between;gap:8px;align-items:center;margin:24px 0 14px;font-size:12px}.section-label small{font-size:9px;color:var(--muted)}.plan-entry{border-top:1px solid var(--line);padding:16px 0 18px}.plan-entry h3{font-size:22px;margin-bottom:5px}.plan-entry p{font-size:11px;color:var(--muted);line-height:1.9;margin-bottom:10px}.plan-entry .btn{font-size:11px;min-height:44px}.book-empty{padding:15px 12px;border:1px dashed #c8a57d;font-size:11px;color:var(--muted);line-height:1.9;text-align:center}.past-label{font-size:9px;color:var(--red);display:inline-block;margin-bottom:6px}.debug-roster{padding:12px;border:1px dashed var(--orange);font-size:11px;line-height:2;margin-top:12px;background:#fff8e9}.debug-roster strong{font-weight:500;display:block;margin-bottom:5px}.presenter-select{width:100%;min-height:44px;border:1px solid var(--line);background:var(--white);padding:9px;font:inherit;font-size:11px;color:var(--blue)}.presenter-q1{display:grid;gap:7px}.presenter-q1 button{min-height:44px;border:1px solid var(--line);background:var(--white);font-size:11px;padding:8px}.presenter-q1 button[aria-pressed="true"]{background:var(--yellow);border-color:var(--red)}.attendance-choice{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:11px}.attendance-choice span{flex:1}.attendance-choice button{min-height:44px;padding:8px 12px;font-size:10px;background:var(--blue);color:var(--white)}.checkout-complete{margin-top:25px}.time-hint{padding:18px 0 0;font-size:10px;color:var(--muted);line-height:1.9}.reminder .text-btn{min-height:44px}.reminder .dismiss{min-width:44px;min-height:44px}.modal-top .close{min-width:44px;min-height:44px}.suggestion-card .collect-line{font-size:9px;color:var(--muted);text-align:center;margin-top:12px}.event-status{font-size:9px;color:var(--red);margin-top:6px}.book-header-note{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:9px}.book-header-note .icon{width:12px;height:12px}@media(max-width:359px){.suggestion-card{padding:16px}.suggestion-art{margin-inline:-16px}.suggestion-card h2{font-size:25px}.priority-strip{padding:9px 10px;font-size:9px}.priority-strip span{font-size:8px}.stamp-slot{min-height:164px}.stamp-slot .slot-stamp{width:66px;height:84px}.format-choice{padding:12px}.quiet-sun:before{left:23px}.quiet-sun:after{right:23px}}
+.reminder .text-btn{display:flex;align-items:center;gap:8px}.suggestion-card h2+.suggestion-art{margin-top:16px}
+.group-quote{font:19px/1.9 var(--serif);margin:15px 0 18px}.group-card .privacy-rule{font-size:10px;line-height:1.9}.group-card .suggestion-art{margin-top:18px}.return-link{border-top:1px solid var(--line);margin-top:23px;padding-top:18px}.return-link p{font-size:10px;color:var(--muted);text-align:center}.collection-stamps{flex-wrap:wrap}.collection-stamps figcaption{max-width:105px}.format-choices .format-choice{min-height:55px}.work-meta .text-btn{display:flex;align-items:center;gap:7px}.reminder .text-btn{display:flex;align-items:center;gap:7px}.brand-en{font-size:31px;letter-spacing:-.8px}</style></head><body><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 6 9 7 9-7M3 19l6-6m12 6-6-6"/></symbol>
+
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-time" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+<symbol id="i-cut" viewBox="0 0 24 24"><circle cx="5" cy="6" r="3"/><circle cx="5" cy="18" r="3"/><path d="m7.5 7.5 13 13m-13-4 13-13M11 11l2 2"/></symbol>
+<symbol id="i-box" viewBox="0 0 24 24"><path d="M3 8h18v4H3zM5 12v8h14v-8M8 4h8l5 4M3 8l5-4m2 12h4"/></symbol>
+<symbol id="i-controls" viewBox="0 0 24 24"><path d="M4 7h6m4 0h6M4 17h10m4 0h2M10 4v6m4 4v6"/></symbol>
+<symbol id="i-stamp" viewBox="0 0 24 24"><path d="M4 3h3l1 2 2-2h4l2 2 1-2h3v4l-2 1 2 2v4l-2 2 2 1v4h-3l-1-2-2 2h-4l-2-2-1 2H4v-4l2-1-2-2v-4l2-2-2-1Z"/><path d="M8 8h8v9H8z"/></symbol>
+<symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 8V3h5m8 0h5v5M3 16v5h5m8 0h5v-5M7 7h3v3H7zm7 0h3v3h-3zM7 14h3v3H7zm7 0h3v3h-3z"/></symbol>
+<symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 2 7M3 4v7h7"/></symbol>
+</defs></svg><div class="app"><div id="storage-warning" class="storage-warning" role="status" hidden></div><header class="masthead"><button class="brand" data-action="nav" data-screen="close" aria-label="Encore，收好这一场"><span><span class="brand-en">Encore</span><span class="brand-cn">再 次 相 见</span></span></button><div class="mini-capsule" aria-hidden="true">•••<i>⊙</i></div></header><div class="session-bar"><span id="identity">参与者 · 林夏</span><button id="view-toggle" data-action="toggle-view">主理人视角 ↗</button></div><div class="clock-line"><span id="clock-label"></span><span class="demo-data">演示数据 Demo data</span></div><nav id="nav" class="nav" aria-label="三个入口"><button data-action="nav" data-screen="close"><span class="n">01</span>收好这一场</button><button data-action="nav" data-screen="next"><span class="n">02</span>下一次相见</button><button data-action="nav" data-screen="collection"><span class="n">03</span>我的 Encore</button></nav><div id="reminder" class="reminder" role="status" aria-live="polite" hidden></div><main id="main"></main><footer class="footer"><span>让一次相遇，有下一次。</span><button id="presenter-button" data-action="presenter"><svg class="icon" aria-hidden="true"><use href="#i-controls"/></svg>演示控制</button></footer></div><div id="toast" class="toast" role="status" aria-live="polite"></div><div id="confirmation" class="confirmation" aria-live="polite" hidden><div class="status-seal">已成行</div></div><dialog id="modal" aria-labelledby="modal-title"><div id="modal-content" class="modal-inner"></div></dialog><dialog id="presenter" class="drawer" aria-labelledby="presenter-title"><div id="presenter-content" class="modal-inner"></div></dialog><noscript><p style="padding:24px">请启用 JavaScript，以体验 Encore 的纪念、邀请与行程。</p></noscript><script>
+
+
+
+/* Original, self-contained postal illustrations. No remote assets. */
+window.ENCORE_ART = (() => {
+  const ink = '#873e2d', blue = '#e8ba87', paper = '#fff3df';
+  const masonry = Array.from({ length: 13 }, (_, i) => {
+    const y = 163 + i * 17;
+    return `<path d="M21 ${y}H605"/><path d="M${i % 2 ? 49 : 78} ${y}v17m72-17v17m72-17v17m72-17v17m72-17v17m72-17v17m72-17v17" opacity=".25"/>`;
+  }).join('');
+  const windows = [79, 163, 247, 331, 415].map((x, i) => `<g transform="translate(${x},170)">
+    <path d="M-8 142V32Q-8-11 24-11T56 32V142Z" fill="${paper}" stroke="${ink}" stroke-width="2"/>
+    <path d="M0 137V34Q0 0 24 0T48 34V137Z" fill="${blue}" stroke="${ink}" stroke-width="2"/>
+    <path d="M4 37Q4 7 24 7T44 37V132H4Z" fill="${ink}"/>
+    <path d="M8 44H40V127H8Z" fill="${blue}"/>
+    <path d="M24 9V133M4 42H44M6 69H42M6 98H42" stroke="${paper}" stroke-width="3"/>
+    <path d="M24 10L7 41M24 10L41 41" stroke="${paper}" stroke-width="2"/>
+    <path d="M9 48L20 45V64L9 68Zm20 28 9-4v19l-9 3Zm-20 30 11-4v21H9Z" fill="${paper}" opacity=".55"/>
+    <path d="M-12 144H60M-14 150H62M-10 155H58" stroke="${ink}" stroke-width="2"/>
+    <path d="M-10 29H-4m56 0h8M-9 13l8 3M-3-2l7 6M10-11l4 8M26-14v8M43-10l-5 8M55 4l-7 4" stroke="${ink}" stroke-width="1.2"/>
+    <path d="M-5 40V137M53 40V137" stroke="${ink}" opacity=".4"/>
+  </g>`).join('');
+  const bottomWindows = [57, 99, 141, 183, 225, 267, 309, 351, 393, 435, 477].map(x => `<g transform="translate(${x},342)"><rect width="23" height="42" fill="${ink}"/><path d="M3 3h17v35H3Z" fill="${blue}"/><path d="M11 2v38M2 18h19" stroke="${paper}" stroke-width="2"/></g>`).join('');
+  const facade = `<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420">
+  <defs>
+    <pattern id="st-win-dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".55" fill="${ink}" opacity=".21"/></pattern>
+    <pattern id="st-win-hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(24)"><path d="M0 0V5" stroke="${ink}" stroke-width="1"/></pattern>
+    <filter id="st-win-grain"><feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".055"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+  </defs>
+  <g filter="url(#st-win-grain)">
+    <rect width="640" height="420" fill="${paper}"/>
+    <rect width="640" height="420" fill="url(#st-win-dots)"/>
+    <circle cx="96" cy="80" r="43" fill="${blue}" opacity=".5"/>
+    <g fill="none" stroke="${ink}" opacity=".25" stroke-width=".8"><path d="M0 54H281M41 46H196M0 62H129M195 70H383M249 78H570M12 89H231M360 39H640M438 48H640M492 32H640"/></g>
+    <path d="M0 154 536 98 640 145V420H0Z" fill="${blue}"/>
+    <path d="M25 146 520 112 615 142V402H25Z" fill="${paper}" stroke="${ink}" stroke-width="2"/>
+    <path d="M520 112 615 142V402H520Z" fill="${blue}" stroke="${ink}" stroke-width="1.5"/>
+    <path d="M25 147 520 113 615 142 615 153 520 126 25 159Z" fill="${ink}"/>
+    <path d="M12 139 520 103 627 137 625 143 520 111 13 147Z" fill="${paper}" stroke="${ink}" stroke-width="1.4"/>
+    <path d="M28 135 520 101 612 130" fill="none" stroke="${ink}" stroke-width="2"/>
+    <path d="M32 125 519 92 610 122V130L519 102 32 136Z" fill="${blue}" stroke="${ink}" stroke-width="1.2"/>
+    <g stroke="${ink}" stroke-width=".8" opacity=".45">${masonry}</g>
+    <path d="M39 165H510M39 324H510M39 332H510M39 394H510" fill="none" stroke="${ink}" stroke-width="2"/>
+    <path d="M32 318H519V327H32Z" fill="${blue}" stroke="${ink}"/>
+    ${windows}${bottomWindows}
+    <g fill="${ink}"><path d="M533 173 548 177V287L533 284Z"/><path d="M560 181 574 185V294L560 290Z"/><path d="M587 189 599 193V301L587 298Z"/></g>
+    <g fill="none" stroke="${paper}" stroke-width="2"><path d="M540 181V278m27-90v98m26-90v95M534 214l14 4m13 4 14 4m13 4 11 4M534 246l14 4m13 4 14 4m13 4 11 4"/></g>
+    <path d="M524 316 612 337V345L524 326Z" fill="${ink}"/>
+    <g stroke="${ink}" fill="${paper}">
+      <path d="M463 109V42H521V107" stroke-width="2"/>
+      <path d="M454 43H530V34H454Z" stroke-width="2"/>
+      <path d="M459 32 492 13 525 32Z" fill="${ink}"/>
+      <path d="M466 30 492 17 518 30Z" fill="${blue}"/>
+      <path d="M474 34V104M510 35V106" stroke-width="3"/>
+      <path d="M481 103V52Q492 38 503 52V103Z" fill="${blue}" stroke-width="1.5"/>
+      <circle cx="492" cy="67" r="10" fill="${paper}" stroke-width="1.5"/>
+      <path d="M492 60V67L498 70M492 15V3M487 6H497" fill="none" stroke-width="1.5"/>
+      <path d="M466 85H518M464 95H520" stroke-width="1"/>
+    </g>
+    <path d="M17 402H625V420H17Z" fill="${ink}"/>
+    <path d="M0 408H640M0 416H640" stroke="${paper}" stroke-width="1" opacity=".5"/>
+    <g fill="${ink}"><path d="M0 110C35 111 44 81 59 44 71 66 67 89 43 114 76 103 97 88 109 93 93 115 69 125 41 126 67 139 78 155 75 173 52 158 42 144 32 130 28 156 13 180 0 184Z"/><path d="M0 128 56 92 25 128 7 174Z"/></g>
+    <g fill="none" stroke="${paper}" stroke-width=".9" opacity=".7"><path d="M0 123 59 59M15 120 43 120 65 138M28 109 31 91M31 126 17 156"/></g>
+    <path d="M40 70Q188 42 344 55T640 38" fill="none" stroke="${ink}" stroke-width="1" opacity=".65"/>
+    <path d="M350 51q6-7 12 0m17 13q5-6 11 0" fill="none" stroke="${ink}" stroke-width="1.4"/>
+    <rect x="39" y="19" width="153" height="20" fill="${paper}"/>
+    <text x="42" y="32" font-family="Georgia,serif" font-size="9" letter-spacing="2.2" fill="${ink}">THE POSTAL WINDOWS</text>
+    <text x="604" y="386" text-anchor="end" font-family="Georgia,serif" font-size="9" letter-spacing="1.3" fill="${ink}" transform="rotate(-90 604 386)">SUZHOU CREEK · SHANGHAI</text>
+  </g></svg>`;
+  const ripples = Array.from({length: 28}, (_, i) => {
+    const y = 295 + i * 4.5;
+    const x = (i * 47) % 190;
+    return `<path d="M${x} ${y}h${40 + (i * 13) % 105}m${12 + i % 7} 0h${25 + (i * 9) % 92}m${16 + i % 12} 0h${48 + (i * 19) % 130}m22 0h90"/>`;
+  }).join('');
+  const rail = Array.from({length: 36}, (_,i) => `<path d="M${i*19-15} 244V265"/>`).join('');
+  const bridge = `<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420">
+  <defs>
+    <pattern id="st-bridge-dots" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".5" fill="${ink}" opacity=".22"/></pattern>
+    <pattern id="st-bridge-hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><path d="M0 0V5" stroke="${ink}" stroke-width=".8"/></pattern>
+    <filter id="st-bridge-grain"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".055"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+  </defs>
+  <g filter="url(#st-bridge-grain)">
+    <rect width="640" height="420" fill="${paper}"/>
+    <rect width="640" height="420" fill="url(#st-bridge-dots)"/>
+    <circle cx="496" cy="92" r="47" fill="${blue}"/>
+    <g fill="none" stroke="${ink}" stroke-width=".8" opacity=".24"><path d="M0 72H265M15 80H143M60 88H328M374 44H640M384 53H603M0 41H155M0 49H88M169 105H388M301 115H640"/></g>
+    <g fill="${blue}" stroke="${ink}" stroke-width="1" opacity=".7">
+      <path d="M0 228V164H43V157H65V228M48 228V176H108V228M98 229V153H142V229M149 229V183H186V229M477 231V159H521V231M523 230V140H579V230M581 230V181H640V230"/>
+      <path d="M535 139V125H568V139M548 125V104H556V125"/>
+    </g>
+    <g fill="${ink}" opacity=".45"><path d="M8 175h5v12H8Zm12 0h5v12h-5Zm12 0h5v12h-5ZM57 188h5v12h-5Zm13 0h5v12h-5Zm13 0h5v12h-5Zm28-25h5v12h-5Zm15 0h5v12h-5Zm362 7h5v12h-5Zm13 0h5v12h-5Zm33-16h5v12h-5Zm13 0h5v12h-5Zm13 0h5v12h-5Zm29 39h5v12h-5Zm14 0h5v12h-5Zm14 0h5v12h-5Z"/></g>
+    <path d="M0 278H640V420H0Z" fill="${blue}"/>
+    <path d="M0 278H640V420H0Z" fill="url(#st-bridge-dots)"/>
+    <path d="M-20 248Q142 160 320 161T659 247V270H-20Z" fill="${paper}" opacity=".52"/>
+    <g fill="none" stroke="${ink}" stroke-linejoin="round">
+      <path d="M-24 245Q137 107 318 107T664 245" stroke-width="18"/>
+      <path d="M-24 245Q137 107 318 107T664 245" stroke="${paper}" stroke-width="2"/>
+      <path d="M-24 244Q138 134 318 134T664 244" stroke-width="8"/>
+      <path d="M31 217 89 169 89 247 160 137 160 247 238 115 238 247 318 108 318 247 400 116 400 247 477 139 477 247 548 174 548 247 608 219" stroke-width="7"/>
+      <path d="M31 217 89 247 160 137 238 247 318 108 400 247 477 139 548 247 608 219" stroke-width="3"/>
+      <path d="M30 247 89 170 160 247 238 115 318 247 400 116 477 247 548 174 608 247" stroke-width="3"/>
+      <path d="M0 247H640" stroke-width="9"/>
+      <path d="M0 244H640" stroke="${paper}" stroke-width="1.4"/>
+      <path d="M0 269H640" stroke-width="12"/>
+      <path d="M0 265H640" stroke="${paper}" stroke-width="1.5"/>
+      <g stroke-width="1.8">${rail}</g>
+      <path d="M0 252H640M0 260H640" stroke-width="1"/>
+    </g>
+    <g fill="${paper}" stroke="${ink}" stroke-width="1.1">
+      <path d="M65 276H110L102 324H73Z"/><path d="M535 276H580L572 324H543Z"/>
+      <path d="M69 285H108M71 296H106M73 308H104M539 285H578M541 296H576M543 308H574"/>
+    </g>
+    <path d="M79 324H107L99 354H84ZM546 324H573L568 351H548Z" fill="${ink}" opacity=".25"/>
+    <g fill="${ink}"><path d="M164 265V207H161V202H172V207H168V265Z"/><path d="M158 200 160 186H173L175 200Z"/><path d="M163 186V180H169V186Z"/><path d="M475 265V207H472V202H483V207H479V265Z"/><path d="M469 200 471 186H484L486 200Z"/><path d="M474 186V180H480V186Z"/></g>
+    <g fill="${paper}"><path d="M162 189H171V198H160Z"/><path d="M473 189H482V198H471Z"/></g>
+    <g fill="none" stroke="${ink}" stroke-width="1" opacity=".6">${ripples}</g>
+    <g fill="none" stroke="${paper}" stroke-width="2" opacity=".72"><path d="M15 312H62m65 0h80m192 0h64m128 0h49M27 340h45m78 0h105m51 0h94m34 0h92M0 365h118m53 0h83m57 0h118m66 0h145M31 388h83m30 0h104m86 0h59m47 0h115M98 402h92m90 0h78m69 0h88"/></g>
+    <g stroke="${ink}" fill="none" opacity=".32" stroke-width="3"><path d="m136 285 31 17-27 9 35 13-40 9 32 16m68-65 45 18-31 10 51 13-37 11 43 13m14-66 61 18-44 10 37 14-31 10 40 15m26-68 44 18-28 11 47 13-23 11 40 14"/></g>
+    <path d="M0 397 60 389 117 393 165 386 202 390V420H0Z" fill="${ink}"/>
+    <path d="m1 405 56-8 51 6 58-8 28 5" fill="none" stroke="${paper}" opacity=".6"/>
+    <path d="M47 74q7-8 14 0m16-15q5-6 11 0m23 24q5-7 12 0" fill="none" stroke="${ink}" stroke-width="1.5"/>
+    <rect x="30" y="24" width="183" height="19" fill="${paper}"/>
+    <text x="32" y="37" font-family="Georgia,serif" font-size="9" letter-spacing="2.2" fill="${ink}">LET THE RIVER REMEMBER</text>
+    <text x="610" y="401" text-anchor="end" font-family="Georgia,serif" font-size="9" letter-spacing="2" fill="${ink}">SHANGHAI · 31°14′ N</text>
+  </g></svg>`;
+  return {window: facade, bridge};
+})();
+
+
+
+
+</script>
+<script>
+
+(function (global) {
+  'use strict';
+  // Original inline illustrations; the shared central crop is 200 80 240 300.
+  var ink = '#873e2d', paper = '#fbf1df', yellow = '#f2cb54', orange = '#d9773e';
+  var dessert = [
+    '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420">',
+    '<defs>',
+    '<pattern id="dt-dots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".6" fill="#873e2d" opacity=".13"/></pattern>',
+    '<pattern id="dt-hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(27)"><path d="M0 0V5" stroke="#873e2d" stroke-width=".8" opacity=".35"/></pattern>',
+    '<filter id="dt-grain"><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".035"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>',
+    '</defs><g filter="url(#dt-grain)">',
+    '<path fill="#fbf1df" d="M0 0h640v420H0z"/>',
+    '<path fill="url(#dt-dots)" d="M0 0h640v420H0z"/>',
+    '<path d="M0 0h640v241C514 214 443 224 325 233S96 222 0 249Z" fill="#edc39c" opacity=".43"/>',
+    '<path d="M37 0v229M42 0v230M598 0v241M603 0v243" stroke="#873e2d" stroke-width="1" opacity=".22"/>',
+    '<path d="M70 231V97Q70 23 145 23T220 97V231Z" fill="#f5dfb9" stroke="#873e2d" stroke-width="1.5"/>',
+    '<path d="M82 231V100Q82 36 145 36T208 100V231Z" fill="#fbf1df" stroke="#873e2d" stroke-width="1"/>',
+    '<path d="M145 36v195M82 116h126M82 171h126" stroke="#873e2d" stroke-width="2"/>',
+    '<path d="M91 110V99Q91 48 137 46v64Zm62 0V46q46 2 46 53v11Z" fill="#d9773e" opacity=".24"/>',
+    '<path d="M91 124h46v39H91zm62 0h46v39h-46zM91 179h46v43H91zm62 0h46v43h-46z" fill="url(#dt-hatch)"/>',
+    '<path d="M53 231h183v8H53z" fill="#873e2d" opacity=".8"/>',
+    '<path d="M70 52 85 46M66 70l15-3M64 92l16-1M69 116l12 1M72 144l9 1" stroke="#873e2d" opacity=".35"/>',
+    '<path d="M458 51h111v140H458Z" fill="#fbf1df" stroke="#873e2d" stroke-width="1.5"/>',
+    '<path d="M465 58h97v126h-97z" fill="none" stroke="#873e2d" opacity=".45"/>',
+    '<text x="513" y="91" text-anchor="middle" fill="#873e2d" font-family="Georgia,SimSun,serif" font-size="19">今晚来坐坐</text>',
+    '<path d="M481 108h65m-65 8h65m-65 8h65m-65 14h65m-65 8h65m-65 8h65m-65 8h39" stroke="#873e2d" stroke-width=".8" opacity=".45"/>',
+    '<path d="M0 253C117 237 225 246 332 245s219-7 308 14v161H0Z" fill="#fbf1df" stroke="#873e2d" stroke-width="1.4"/>',
+    '<path d="M0 338c120-16 217-10 323-5s221-6 317 10v77H0Z" fill="#e7b379" opacity=".28"/>'
+  ];
+  for (var y = 351; y < 421; y += 17) {
+    dessert.push('<path d="M0 ' + y + 'q155-15 317-7t323 3" fill="none" stroke="' + ink + '" stroke-width=".65" opacity=".25"/>');
+  }
+  for (var x = 16; x < 640; x += 28) {
+    dessert.push('<path d="M' + x + ' 337l-14 83" fill="none" stroke="' + ink + '" stroke-width=".7" opacity=".22"/>');
+  }
+  dessert.push(
+    '<ellipse cx="324" cy="325" rx="178" ry="51" fill="#873e2d" opacity=".1"/>',
+    '<ellipse cx="320" cy="308" rx="171" ry="58" fill="#fbf1df" stroke="#873e2d" stroke-width="2"/>',
+    '<ellipse cx="320" cy="304" rx="157" ry="49" fill="none" stroke="#873e2d" stroke-width=".7"/>',
+    '<ellipse cx="320" cy="304" rx="131" ry="39" fill="#f3d99d" stroke="#873e2d" stroke-width="1"/>',
+    '<path d="M165 318q149 59 311-2" fill="none" stroke="#873e2d" stroke-width=".7" opacity=".5"/>',
+    '<ellipse cx="320" cy="306" rx="70" ry="18" fill="#873e2d" opacity=".17"/>',
+    '<path d="M263 265h115v39q-58 26-115 0Z" fill="#d9773e" stroke="#873e2d" stroke-width="1.8"/>',
+    '<path d="M264 279q57 23 113 0v8q-57 23-113 0Z" fill="#f2cb54" stroke="#873e2d" stroke-width=".7"/>',
+    '<path d="M264 294q56 25 113 0v7q-56 25-113 0Z" fill="url(#dt-hatch)"/>',
+    '<ellipse cx="320" cy="265" rx="57" ry="20" fill="#fbf1df" stroke="#873e2d" stroke-width="1.6"/>',
+    '<path d="M269 260q9-12 18-1t18-2 17 1 18-1 18 3 15 0" fill="none" stroke="#d9773e" stroke-width="3" stroke-linecap="round"/>',
+    '<path d="M286 251q-7-13 3-18 7 2 9 12m-9-11q10-12 17-4" fill="#d9773e" stroke="#873e2d" stroke-width="1.3"/>',
+    '<path d="M351 251q-8-15 5-20 10 5 7 17m-7-18q5-10 13-10" fill="#d9773e" stroke="#873e2d" stroke-width="1.3"/>',
+    '<circle cx="286" cy="251" r="5" fill="#873e2d"/>',
+    '<circle cx="355" cy="250" r="5" fill="#873e2d"/>',
+    '<path d="M311 123h18v143q-9 4-18 0Z" fill="#fbf1df" stroke="#873e2d" stroke-width="1.8"/>',
+    '<path d="M317 124v137M327 125v134" stroke="#d9773e" stroke-width="1" opacity=".6"/>',
+    '<path d="M311 126q2 9 5 1t4 7 4-5 5 0" fill="none" stroke="#873e2d" stroke-width="1.1"/>',
+    '<ellipse cx="320" cy="123" rx="9" ry="3" fill="#f2cb54" stroke="#873e2d" stroke-width="1"/>',
+    '<path d="M320 121v-10" stroke="#873e2d" stroke-width="1.5"/>',
+    '<path d="M320 110c-23-13-11-32 4-48-1 19 20 28 10 43q-5 9-14 5Z" fill="#f2cb54" stroke="#d9773e" stroke-width="1.7"/>',
+    '<path d="M322 109c-10-7-5-17 2-25 0 11 9 16 3 23Z" fill="#d9773e"/>',
+    '<g stroke="#d9773e" stroke-width="1.2" stroke-linecap="round"><path d="m294 83-10-5m12 22-11 3m31-48-2-12m25 22 8-9m-3 31 11-1m-14 20 8 5"/></g>',
+    '<path d="M102 268q9 18 32 0l-2 36q-1 19-15 19t-14-19Z" fill="#fbf1df" stroke="#873e2d" stroke-width="1.5"/>',
+    '<ellipse cx="117" cy="268" rx="15" ry="5" fill="#edc39c" stroke="#873e2d" stroke-width="1"/>',
+    '<path d="M117 324v34m-17 4q17-8 34 0m-31-88 2 31m8-31v37m8-37v37m8-37-2 31" fill="none" stroke="#873e2d" stroke-width="1"/>',
+    '<path d="M497 271v90m-5-95v25q5 8 10 0v-25m-5 0v27m28-26q-8 13-7 32h7v62" fill="none" stroke="#873e2d" stroke-width="2" stroke-linecap="round"/>',
+    '<path d="M418 319q17-13 26-4m-20 6q20-3 26 4" fill="none" stroke="#d9773e" stroke-width="2.4" stroke-linecap="round"/>',
+    '<circle cx="418" cy="316" r="3" fill="#873e2d"/><circle cx="453" cy="321" r="2" fill="#873e2d"/>',
+    '<path d="M389 205q28-12 48 0m-39 8q22-6 37 1" fill="none" stroke="#873e2d" stroke-width=".8" opacity=".27"/>',
+    '<text x="28" y="28" fill="#873e2d" font-family="Georgia,SimSun,serif" font-size="10" letter-spacing="2">一桌烛光 · 一点甜</text>',
+    '<text x="610" y="399" text-anchor="end" fill="#873e2d" font-family="Georgia,serif" font-size="10" letter-spacing="1.5">Encore</text>',
+    '</g></svg>'
+  );
+  var neon = [
+    '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420">',
+    '<defs>',
+    '<pattern id="nt-dots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".65" fill="#873e2d" opacity=".18"/></pattern>',
+    '<pattern id="nt-hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(26)"><path d="M0 0V5" stroke="#873e2d" stroke-width="1" opacity=".27"/></pattern>',
+    '<filter id="nt-grain"><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".035"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>',
+    '</defs><g filter="url(#nt-grain)">',
+    '<path fill="#fbf1df" d="M0 0h640v420H0z"/>',
+    '<path fill="#edc39c" d="M29 22h582v352H29z"/>',
+    '<path fill="url(#nt-dots)" d="M29 22h582v352H29z"/>',
+    '<path d="M26 18h589v9H26zm0 344h589v12H26z" fill="#873e2d" opacity=".78"/>'
+  ];
+  for (y = 45; y < 351; y += 20) {
+    neon.push('<path d="M31 ' + y + 'H608" fill="none" stroke="' + ink + '" stroke-width=".7" opacity=".28"/>');
+    var offset = y % 40 === 5 ? 45 : 16;
+    for (x = offset; x < 614; x += 62) {
+      neon.push('<path d="M' + x + ' ' + y + 'v20" stroke="' + ink + '" stroke-width=".55" opacity=".23"/>');
+    }
+  }
+  neon.push(
+    '<path d="M197 349V187q0-98 123-98t123 98v162Z" fill="#873e2d" stroke="#873e2d" stroke-width="2"/>',
+    '<path d="M209 347V188q0-87 111-87t111 87v159Z" fill="#f3dcae" stroke="#fbf1df" stroke-width="1.6"/>',
+    '<path d="M219 342V190q0-78 101-78t101 78v152Z" fill="#d9773e" opacity=".48"/>',
+    '<path d="M223 194h194v147H223Z" fill="#fbf1df" stroke="#873e2d" stroke-width="1.5"/>',
+    '<path d="M230 201h83v133h-83zm97 0h83v133h-83z" fill="#e9c294" stroke="#873e2d" stroke-width=".8"/>',
+    '<path d="M231 274h82m14 0h82" stroke="#873e2d" stroke-width="1.4"/>',
+    '<path d="m237 209 35-8m-35 18 55-13m-55 23 55-13m42-7 34-8m-34 18 54-13m-54 23 54-13" stroke="#fbf1df" stroke-width="3" opacity=".72"/>',
+    '<path d="M317 201v138m6-138v138" stroke="#873e2d" stroke-width="2"/>',
+    '<path d="M306 261v17m28-17v17" stroke="#873e2d" stroke-width="3" stroke-linecap="round"/>',
+    '<rect x="205" y="111" width="230" height="79" rx="10" fill="#fbf1df" stroke="#873e2d" stroke-width="2"/>',
+    '<rect x="211" y="117" width="218" height="67" rx="6" fill="none" stroke="#d9773e" stroke-width="2.6"/>',
+    '<rect x="216" y="122" width="208" height="57" rx="3" fill="none" stroke="#f2cb54" stroke-width="2"/>',
+    '<text x="320" y="160" text-anchor="middle" fill="#873e2d" stroke="#f2cb54" stroke-width="3" paint-order="stroke" font-family="SimSun,serif" font-size="38" letter-spacing="8">来坐坐</text>',
+    '<text x="320" y="160" text-anchor="middle" fill="none" stroke="#d9773e" stroke-width=".6" font-family="SimSun,serif" font-size="38" letter-spacing="8">来坐坐</text>',
+    '<path d="M198 150h-12v-20m250 20h13v22" fill="none" stroke="#873e2d" stroke-width="1.6"/>',
+    '<path d="M190 130q-3-28-10-49m265 91q6 17 22 19v77" fill="none" stroke="#873e2d" stroke-width="1.1"/>',
+    '<g transform="translate(320 236)" stroke="#873e2d" stroke-width="1.3"><path d="M0-24c-19-14-32 11-8 24-24-13-35 15-9 20 17 5 17-15 17-20 0 5 0 25 17 20 26-5 15-33-9-20C32-13 19-38 0-24Z" fill="#f2cb54"/><circle r="5" fill="#d9773e"/></g>',
+    '<path d="M209 345h222v9H209zm-8 9h238v10H201zm-8 10h254v10H193z" fill="#fbf1df" stroke="#873e2d" stroke-width="1.2"/>',
+    '<path d="M66 277V128q0-37 46-37t46 37v149Z" fill="#873e2d" stroke="#873e2d" stroke-width="1.5"/>',
+    '<path d="M74 270V130q0-31 38-31t38 31v140Z" fill="#f3d99d" stroke="#fbf1df" stroke-width="1"/>',
+    '<path d="M112 100v170M74 159h76M74 218h76" stroke="#873e2d" stroke-width="1.6"/>',
+    '<path d="M81 170h24m13 0h25m-62 8h24m13 0h25m-62 8h24m13 0h25m-62 8h24m13 0h25m-62 8h24m13 0h25" stroke="#873e2d" stroke-width="1" opacity=".4"/>',
+    '<path d="M55 277h113v8H55Z" fill="#873e2d"/>',
+    '<path d="M484 277V128q0-37 46-37t46 37v149Z" fill="#873e2d" stroke="#873e2d" stroke-width="1.5"/>',
+    '<path d="M492 270V130q0-31 38-31t38 31v140Z" fill="#fbf1df" stroke="#d9773e" stroke-width="1.2"/>',
+    '<text x="530" y="151" text-anchor="middle" fill="#873e2d" font-family="Georgia,SimSun,serif" font-size="16">今夜菜单</text>',
+    '<path d="M503 166h54m-54 9h54m-54 9h41m-41 21h54m-54 9h54m-54 9h39m-39 20h54m-54 9h54" stroke="#873e2d" stroke-width="1" opacity=".5"/>',
+    '<path d="M473 277h113v8H473Z" fill="#873e2d"/>',
+    '<path d="M19 40h602l-13 33H32Z" fill="#fbf1df" stroke="#873e2d" stroke-width="1.5"/>'
+  );
+  for (x = 34; x < 605; x += 38) {
+    neon.push('<path d="M' + x + ' 41h18l-6 31h-18Z" fill="' + (x % 3 === 1 ? orange : ink) + '" opacity=".84"/>');
+  }
+  neon.push(
+    '<path d="M32 74q9 12 19 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0 10 12 20 0" fill="none" stroke="#873e2d" stroke-width="1.2"/>',
+    '<path d="M4 375h632v45H4Z" fill="#fbf1df"/>',
+    '<path d="M0 388h640M0 405h640M38 375l-17 45m86-45-10 45m84-45-5 45m83-45 1 45m78-45 7 45m76-45 12 45m73-45 18 45m70-45 25 45" stroke="#873e2d" stroke-width=".8" opacity=".35"/>',
+    '<path d="M71 332h52l-5 43H76Z" fill="#d9773e" stroke="#873e2d" stroke-width="1.5"/>',
+    '<path d="M70 331h55v7H70Z" fill="#f2cb54" stroke="#873e2d" stroke-width="1.2"/>',
+    '<path d="M97 331v-60m0 31q-34-5-27-24 25 0 27 24Zm0 12q33-8 27-26-24 3-27 26Zm0-24q-22-20-12-35 18 7 12 35Zm0 1q30-17 20-34-20 4-20 34Z" fill="#f3d99d" stroke="#873e2d" stroke-width="1.2"/>',
+    '<path d="M95 318q-30-2-29-17 21-6 29 17m5 8q27-4 29-19-24-2-29 19" fill="#d9773e" stroke="#873e2d" stroke-width="1"/>',
+    '<path d="M514 306h49v58h-49z" fill="#fbf1df" stroke="#873e2d" stroke-width="1.3"/>',
+    '<text x="538" y="326" text-anchor="middle" fill="#873e2d" font-family="SimSun,serif" font-size="11">留一盏灯</text>',
+    '<text x="538" y="344" text-anchor="middle" fill="#873e2d" font-family="SimSun,serif" font-size="11">等你来坐</text>',
+    '<text x="37" y="19" fill="#873e2d" font-family="Georgia,SimSun,serif" font-size="10" letter-spacing="1.5">静安 · 今晚来坐坐</text>',
+    '<text x="605" y="400" text-anchor="end" fill="#873e2d" font-family="Georgia,serif" font-size="11" letter-spacing="1.5">Encore</text>',
+    '</g></svg>'
+  );
+  global.ENCORE_DINNER_ART = { dessert: dessert.join(''), neon: neon.join('') };
+})(window);
+
+
+</script>
+<script>
+(function (global) {
+  'use strict';
+
+  // One domain record powers every Encore screen; private choices are never public data.
+  var KEY = 'encore.demo.v1', ME = 'linxia', HOST = 'aning';
+  var PEOPLE = [
+    { id: 'aning', name: '阿宁', host: true },
+    { id: 'linxia', name: '林夏' },
+    { id: 'zhoumo', name: '周默' },
+    { id: 'chenyihe', name: '陈一禾' },
+    { id: 'suxiaoman', name: '苏小满' },
+    { id: 'laogu', name: '老顾' }
+  ];
+  var IDS = PEOPLE.map(function (p) { return p.id; });
+  var NEW_PEOPLE = [
+    { id: 'new-xuyan', name: '许言', isNew: true },
+    { id: 'new-tangke', name: '唐可', isNew: true },
+    { id: 'new-yezhi', name: '叶知', isNew: true },
+    { id: 'new-wenxi', name: '闻溪', isNew: true },
+    { id: 'new-qiaoyun', name: '乔云', isNew: true },
+    { id: 'new-luyuan', name: '陆远', isNew: true }
+  ];
+  var STATES = ['OPEN', 'CONFIRMED', 'EXPIRED', 'BELOW_MIN', 'CANCELLED', 'REOPENED', 'DONE'];
+  var PRESETS = {
+    day0: '2026-11-14T21:30:00+08:00',
+    day2: '2026-11-16T12:00:00+08:00',
+    groupReminder: '2026-11-16T20:00:00+08:00',
+    deadline: '2026-11-17T18:01:00+08:00',
+    meeting: '2026-11-21T19:00:00+08:00',
+    day7: '2026-11-21T10:00:00+08:00',
+    day30: '2026-12-14T12:00:00+08:00'
+  };
+  var DINNER = {
+    id: 'dinner12', title: '盲盒晚餐 · 第 12 桌', kind: 'dinner',
+    date: '2026-11-14T19:00:00+08:00', place: '静安 · 微光餐厅（虚构）',
+    intensity: 'high', socialIntensity: '高', durationMinutes: 150,
+    photos: ['dessert', 'neon'], attendeeIds: IDS.slice()
+  };
+  var CATALOG = [
+    { id: 'new-table', title: '新的一桌', kind: 'dinner', date: '2026-11-28T19:00:00+08:00', place: '静安 · 微光餐厅（虚构）', intensity: 'high', socialIntensity: '高', durationMinutes: 150, capacity: 6, photos: ['dessert', 'neon'], description: '同样是晚餐，换一桌新的相遇。' },
+    { id: 'city-walk', title: '邮局漫步', kind: 'walk', series: '城市漫步系列', date: '2026-11-22T10:00:00+08:00', place: '上海邮政总局外', intensity: 'low', socialIntensity: '低', durationMinutes: 90, photos: ['window', 'bridge'], description: '沿河看看建筑，少一点聊天，多一点风景。' },
+    { id: 'workshop', title: '橡皮章工作坊', kind: 'workshop', date: '2026-11-29T14:00:00+08:00', place: '长宁 · 暖橙手作室（虚构）', intensity: 'medium', socialIntensity: '中', durationMinutes: 120, photos: ['window', 'bridge'], description: '双手忙起来，想聊就聊，安静做也很好。' },
+    { id: 'volunteer', title: '社区书架志愿日', kind: 'volunteer', date: '2026-12-06T09:30:00+08:00', place: '普陀 · 里弄书屋（虚构）', intensity: 'low', socialIntensity: '低', durationMinutes: 150, photos: ['window', 'bridge'], description: '一起整理书架，让一件小事成为下一次相见。' }
+  ];
+  var THEMES = ['城市与建筑', '手作与印记', '社区与志愿', '一桌好好吃的饭'];
+  var listeners = [], storageAvailable = true, storageWarning = '';
+
+  function copy(v) { return JSON.parse(JSON.stringify(v)); }
+  function limit(v) { return Array.from(String(v || '')).slice(0, 60).join(''); }
+  function validDate(v) { return typeof v === 'string' && Number.isFinite(Date.parse(v)); }
+  function validPeople(values) {
+    return Array.isArray(values) ? values.filter(function (id, i) { return id !== ME && IDS.indexOf(id) >= 0 && values.indexOf(id) === i; }) : [];
+  }
+  function blankDraft(now) { return { source: null, stamped: false, note: '', dirty: false, lastSavedWorkId: null, updatedAt: now }; }
+  function inviteEvent(inv) {
+    return {
+      id: inv.targetEventId, title: inv.title, kind: inv.kind, date: inv.date, place: inv.place,
+      intensity: inv.kind === 'dinner' ? 'high' : 'low', socialIntensity: inv.kind === 'dinner' ? '高' : '低',
+      durationMinutes: inv.kind === 'dinner' ? 150 : 90,
+      photos: inv.kind === 'dinner' ? ['dessert', 'neon'] : ['window', 'bridge'],
+      invitationId: inv.id
+    };
+  }
+  function initialInvite() {
+    return {
+      id: 'group-next', sourceEventId: DINNER.id, targetEventId: 'reunion1',
+      kind: 'dinner', title: '原组再聚 · 暖灯晚餐',
+      date: '2026-11-21T19:00:00+08:00', deadline: '2026-11-17T18:00:00+08:00',
+      place: '静安 · 微光餐厅（虚构）', route: '还是这张桌子，接着聊上次没讲完的故事。',
+      quote: '今晚先聊到这里。下一次，要不要还和这一桌的人，再好好吃顿饭？',
+      state: 'OPEN', replies: {}, confirmedIds: [], eligibleIds: IDS.slice(), hostId: HOST,
+      createdAt: PRESETS.day0, reminderAt: PRESETS.groupReminder, doneAt: null, nextSentAt: null,
+      nextInvitationId: null, scanIds: [], revision: 0
+    };
+  }
+  function initial() {
+    return {
+      version: 1, now: PRESETS.day0, screen: 'close', view: 'guest',
+      activeEventId: DINNER.id, activeInvitationId: 'group-next', sequence: 1,
+      preferences: { sourceEventId: DINNER.id, format: null, company: null, seeAgain: [], excluded: [] },
+      mutualResponses: {}, preferredDifferent: 'city-walk',
+      invitations: [initialInvite()], attended: [Object.assign(copy(DINNER), { attendedAt: PRESETS.day0 })],
+      drafts: { dinner12: blankDraft(PRESETS.day0) }, works: [], bookings: [],
+      kept: null, reminders: [], interest: [], seriesSeen: false
+    };
+  }
+  var state = initial();
+  function nowNumber() { return Date.parse(state.now); }
+  function activeInvite(payload) {
+    return state.invitations.find(function (inv) { return inv.id === (payload && payload.invitationId || state.activeInvitationId); });
+  }
+  function eventFor(id) {
+    return state.attended.find(function (e) { return e.id === id; }) ||
+      CATALOG.find(function (e) { return e.id === id; }) ||
+      (function () { var i = state.invitations.find(function (inv) { return inv.targetEventId === id; }); return i ? inviteEvent(i) : null; })();
+  }
+  function attendedEvent(payload) {
+    return state.attended.find(function (e) { return e.id === (payload && payload.eventId || state.activeEventId); });
+  }
+  function personName(id) {
+    var p = PEOPLE.concat(NEW_PEOPLE).find(function (p) { return p.id === id; });
+    return p ? p.name : '新朋友';
+  }
+  function conflict(inv) {
+    return !!inv && ['CONFIRMED', 'BELOW_MIN', 'DONE'].indexOf(inv.state) >= 0 &&
+      inv.confirmedIds.some(function (id) { return state.preferences.excluded.indexOf(id) >= 0; });
+  }
+  function mine(inv) { return !!(inv && inv.replies[ME]); }
+  function visibleConfirmed(inv) { return mine(inv) && !conflict(inv) && ['CONFIRMED', 'DONE'].indexOf(inv.state) >= 0; }
+  function canReply(inv) {
+    return !!inv && !conflict(inv) && inv.eligibleIds.indexOf(ME) >= 0 &&
+      ['OPEN', 'REOPENED', 'CONFIRMED'].indexOf(inv.state) >= 0 && nowNumber() < Date.parse(inv.deadline);
+  }
+  function formatFits(inv) {
+    return state.preferences.format === 'same' ? inv.kind === 'dinner' : inv.kind !== 'dinner';
+  }
+  function matchId() {
+    return state.preferences.seeAgain.find(function (id) {
+      return state.mutualResponses[id] === true && state.preferences.excluded.indexOf(id) < 0;
+    }) || null;
+  }
+  function activeYes() {
+    return state.invitations.some(function (inv) { return mine(inv) && ['OPEN', 'REOPENED', 'CONFIRMED', 'BELOW_MIN', 'DONE'].indexOf(inv.state) >= 0; });
+  }
+  function suggestion() {
+    var pref = state.preferences, inv = activeInvite();
+    if (nowNumber() >= Date.parse(PRESETS.day30) && !state.bookings.length && !activeYes()) {
+      return { kind: 'series', branch: 'series', title: '新系列，等你有空再来。', reason: '先挑一个喜欢的主题，不必急着安排下一场。', themes: THEMES.slice() };
+    }
+    if (pref.format === 'pause') return { kind: 'interest', branch: 'pause', title: '先歇一歇，也没关系。', reason: '留下感兴趣的主题，下一次可以慢慢决定。', themes: THEMES.slice() };
+    if (!pref.format || !pref.company) return { kind: 'waiting', branch: 'unanswered', title: '先说说，下一次想怎样相见。', reason: '活动形式和同行的人，可以分别选择。' };
+    var failedGroup = !!inv && (['EXPIRED', 'CANCELLED'].indexOf(inv.state) >= 0 || conflict(inv));
+    if (pref.company === 'group' && inv && !failedGroup && inv.eligibleIds.indexOf(ME) >= 0) {
+      if (!formatFits(inv)) return {
+        kind: 'group-interest', branch: 'group-format', title: '和原组，换一种相见。',
+        reason: pref.format === 'different' ? '你想保留同行的人，也想换个活动形式。先私下收好这个想法，等合适的安排。' : '你想和原组再吃一顿饭。这次邀请是另一种形式，先收好对下一桌的期待。',
+        themes: pref.format === 'different' ? ['和原组一起城市漫步'] : ['和原组再来一场晚餐'], invitationId: inv.id
+      };
+      return { kind: 'group', branch: 'group', title: inv.title, reason: '一封寄给原组的邀请。你的确认，在成行前只留给自己。', invitationId: inv.id, eventId: inv.targetEventId, event: inviteEvent(inv) };
+    }
+    var candidates = CATALOG.filter(function (e) {
+      return Date.parse(e.date) > nowNumber() && !state.attended.some(function (past) { return past.id === e.id; }) &&
+        (pref.format === 'same' ? e.kind === 'dinner' : e.kind !== 'dinner');
+    }).sort(function (a, b) {
+      var intensity = { low: 1, medium: 2, high: 3 };
+      return intensity[a.intensity] - intensity[b.intensity] || Date.parse(a.date) - Date.parse(b.date);
+    });
+    var event = pref.format === 'different' && candidates.find(function (e) { return e.id === state.preferredDifferent; }) || candidates[0];
+    if (!event) return {
+      kind: 'interest', branch: 'no-upcoming', title: '合适的下一次，慢慢等。',
+      reason: '目前还没有时间和形式都合适的新活动。先收好感兴趣的主题，有新安排时再决定。',
+      themes: THEMES.slice()
+    };
+    var match = pref.company === 'familiar' ? matchId() : null;
+    var reason = failedGroup && pref.company === 'group' ? '还有别的合适相见。保留想要的形式，换一个周末再出发。' :
+      match ? '一位熟面孔，和一些新朋友。' :
+      pref.format === 'same' ? '这一次，认识一桌全新的朋友。' : event.description;
+    var result = {
+      kind: 'event', branch: failedGroup && pref.company === 'group' ? 'fallback' : match ? 'familiar' : pref.format === 'different' ? 'different' : 'new',
+      title: match ? '一位熟面孔' : event.title, reason: reason, eventId: event.id, event: copy(event),
+      booked: state.bookings.some(function (b) { return b.eventId === event.id; })
+    };
+    if (match) {
+      result.mutualId = match; result.mutualName = personName(match);
+      result.reveal = '你和' + personName(match) + '都想再见到对方';
+    }
+    return result;
+  }
+  function rosterFor(eventId) {
+    var inv = state.invitations.find(function (i) { return i.targetEventId === eventId; });
+    var past = state.attended.find(function (e) { return e.id === eventId; });
+    var ids = [];
+    if (inv) {
+      if (['CONFIRMED', 'BELOW_MIN', 'DONE'].indexOf(inv.state) < 0) return [];
+      ids = inv.confirmedIds.slice();
+    } else if (past) ids = Array.isArray(past.attendeeIds) ? past.attendeeIds.slice() : IDS.slice();
+    else {
+      if (!CATALOG.some(function (e) { return e.id === eventId; })) return [];
+      var booked = state.bookings.find(function (b) { return b.eventId === eventId; });
+      var rec = suggestion(), matching = booked ? booked.rosterMode === 'familiar' && booked.mutualId :
+        rec.kind === 'event' && rec.eventId === eventId && rec.mutualId;
+      ids = [ME]; if (matching) ids.push(matching);
+      ids = ids.concat(NEW_PEOPLE.map(function (p) { return p.id; }));
+    }
+    ids = ids.filter(function (id, index) { return ids.indexOf(id) === index && state.preferences.excluded.indexOf(id) < 0; });
+    if (!inv && !past) NEW_PEOPLE.forEach(function (p) { if (ids.length < 6 && ids.indexOf(p.id) < 0) ids.push(p.id); });
+    return (inv ? ids : ids.slice(0, 6)).map(function (id) { return { id: id, name: personName(id), isNew: id.indexOf('new-') === 0, isMe: id === ME }; });
+  }
+  function earlyWindow() {
+    return { startsAt: PRESETS.day2, endsAt: '2026-11-19T12:00:00+08:00', remainingMs: Math.max(0, Date.parse('2026-11-19T12:00:00+08:00') - nowNumber()),
+      active: nowNumber() >= Date.parse(PRESETS.day2) && nowNumber() < Date.parse('2026-11-19T12:00:00+08:00'),
+      ended: nowNumber() >= Date.parse('2026-11-19T12:00:00+08:00') };
+  }
+  function dismissReminders(invitationId) {
+    state.reminders.forEach(function (r) {
+      if (!r.dismissed && (!invitationId || r.invitationId === invitationId)) { r.dismissed = true; r.dismissedAt = state.now; }
+    });
+  }
+  function tick() {
+    state.invitations.forEach(function (inv) {
+      if (['OPEN', 'REOPENED'].indexOf(inv.state) >= 0 && nowNumber() >= Date.parse(inv.deadline)) inv.state = 'EXPIRED';
+      if (mine(inv) || conflict(inv) || ['OPEN', 'REOPENED', 'CONFIRMED'].indexOf(inv.state) < 0 ||
+          nowNumber() >= Date.parse(inv.deadline)) dismissReminders(inv.id);
+      if (state.kept && state.kept.kind === 'group' && state.kept.invitationId === inv.id && !mine(inv) &&
+          !conflict(inv) && inv.reminderAt && nowNumber() >= Date.parse(inv.reminderAt) &&
+          nowNumber() < Date.parse(inv.deadline) && ['OPEN', 'REOPENED', 'CONFIRMED'].indexOf(inv.state) >= 0 &&
+          !state.reminders.some(function (r) { return r.invitationId === inv.id; })) {
+        state.reminders.push({ id: 'reminder-' + inv.id, kind: 'group', invitationId: inv.id, personId: ME,
+          text: '你收好的邀请，周二 18:00 前回复', deliveredAt: state.now, dismissed: false });
+      }
+    });
+    var rec = suggestion();
+    if (state.kept && state.kept.kind === 'event' && nowNumber() >= Date.parse(PRESETS.day7) &&
+        nowNumber() < Date.parse(PRESETS.day30) && !state.bookings.length && !activeYes() &&
+        rec.kind === 'event' && state.kept.eventId === rec.eventId && nowNumber() < Date.parse(rec.event.date) &&
+        !state.reminders.some(function (r) { return r.kind === 'event'; })) {
+      state.reminders.push({ id: 'reminder-kept-event', kind: 'event', eventId: rec.eventId, personId: ME,
+        text: '你收好的下一场，还在等你慢慢决定。', deliveredAt: state.now, dismissed: false });
+    }
+    if (state.preferences.format === 'pause' || nowNumber() >= Date.parse(PRESETS.day30)) dismissReminders();
+    if (nowNumber() >= Date.parse(PRESETS.day30) && !state.bookings.length && !activeYes()) state.seriesSeen = true;
+  }
+  function normalize(saved) {
+    if (!saved || saved.version !== 1 || !validDate(saved.now) || !Array.isArray(saved.invitations) ||
+        !saved.invitations.length || !Array.isArray(saved.attended) || !Array.isArray(saved.works) || !Array.isArray(saved.bookings)) throw new Error('Invalid stored Encore data');
+    var result = Object.assign(initial(), saved);
+    result.screen = ['close', 'next', 'collection'].indexOf(result.screen) >= 0 ? result.screen : 'close';
+    result.view = result.view === 'host' ? 'host' : 'guest';
+    result.sequence = Math.max(1, Number(result.sequence) || 1);
+    result.preferences = Object.assign(initial().preferences, result.preferences || {});
+    result.preferences.sourceEventId = DINNER.id;
+    if (['same', 'different', 'pause'].indexOf(result.preferences.format) < 0) result.preferences.format = null;
+    if (['group', 'familiar', 'new'].indexOf(result.preferences.company) < 0) result.preferences.company = null;
+    result.preferences.excluded = validPeople(result.preferences.excluded);
+    result.preferences.seeAgain = validPeople(result.preferences.seeAgain).filter(function (id) { return result.preferences.excluded.indexOf(id) < 0; });
+    result.mutualResponses = result.mutualResponses && typeof result.mutualResponses === 'object' ? result.mutualResponses : {};
+    result.preferredDifferent = result.preferredDifferent === 'workshop' ? 'workshop' : 'city-walk';
+    result.invitations.forEach(function (inv) {
+      if (!inv || typeof inv.id !== 'string' || !validDate(inv.date) || !validDate(inv.deadline) || STATES.indexOf(inv.state) < 0 ||
+          typeof inv.sourceEventId !== 'string' || typeof inv.targetEventId !== 'string') throw new Error('Invalid stored Encore data');
+      inv.kind = inv.kind === 'walk' ? 'walk' : 'dinner';
+      inv.eligibleIds = Array.isArray(inv.eligibleIds) ? inv.eligibleIds.filter(function (id) { return IDS.indexOf(id) >= 0; }) : IDS.slice();
+      var replies = {}; inv.eligibleIds.forEach(function (id) { if (inv.replies && inv.replies[id] === true) replies[id] = true; }); inv.replies = replies;
+      inv.confirmedIds = ['CONFIRMED', 'BELOW_MIN', 'DONE'].indexOf(inv.state) >= 0 ? Object.keys(replies) : [];
+      inv.scanIds = Array.isArray(inv.scanIds) ? inv.scanIds : []; inv.hostId = inv.hostId || HOST;
+    });
+    result.attended = result.attended.filter(function (e, i, all) {
+      return e && typeof e.id === 'string' && typeof e.title === 'string' && validDate(e.date) && all.findIndex(function (p) { return p.id === e.id; }) === i;
+    });
+    if (!result.attended.some(function (e) { return e.id === DINNER.id; })) result.attended.unshift(Object.assign(copy(DINNER), { attendedAt: PRESETS.day0 }));
+    result.drafts = result.drafts && typeof result.drafts === 'object' ? result.drafts : {};
+    result.attended.forEach(function (e) {
+      e.photos = e.kind === 'dinner' ? ['dessert', 'neon'] : ['window', 'bridge'];
+      var d = Object.assign(blankDraft(result.now), result.drafts[e.id] || {});
+      if (e.photos.indexOf(d.source) < 0) d.source = null;
+      d.stamped = !!d.stamped && !!d.source; d.note = limit(d.note); d.dirty = !!d.dirty; result.drafts[e.id] = d;
+    });
+    result.works = result.works.filter(function (w) {
+      var e = w && result.attended.find(function (e) { return e.id === w.eventId; });
+      return e && typeof w.id === 'string' && e.photos.indexOf(w.source) >= 0;
+    }).map(function (w) { w.note = limit(w.note); w.scope = w.scope === 'group' ? 'group' : 'self'; return w; });
+    result.bookings = result.bookings.filter(function (b, index, all) {
+      return b && CATALOG.some(function (e) { return e.id === b.eventId; }) && all.findIndex(function (p) { return p.eventId === b.eventId; }) === index;
+    });
+    result.bookings.forEach(function (b) { b.rosterMode = b.rosterMode === 'familiar' ? 'familiar' : 'new'; if (IDS.indexOf(b.mutualId) < 0) b.mutualId = null; });
+    result.reminders = Array.isArray(result.reminders) ? result.reminders : [];
+    result.interest = Array.isArray(result.interest) ? result.interest : [];
+    if (!result.attended.some(function (e) { return e.id === result.activeEventId; })) result.activeEventId = DINNER.id;
+    if (!result.invitations.some(function (i) { return i.id === result.activeInvitationId; })) result.activeInvitationId = result.invitations[result.invitations.length - 1].id;
+    if (!result.kept || ['event', 'group'].indexOf(result.kept.kind) < 0) result.kept = null;
+    return result;
+  }
+  try {
+    var raw = global.localStorage.getItem(KEY);
+    if (raw) {
+      state = normalize(JSON.parse(raw));
+      if (state.works.length) state.screen = 'collection';
+    }
+  } catch (error) {
+    state = initial();
+    if (error instanceof SyntaxError || /Invalid stored/.test(error.message || '')) storageWarning = '上次的演示数据未能读取，已重新开始。';
+    else { storageAvailable = false; storageWarning = '本地存储不可用，当前内容会暂存在本页内存。'; }
+  }
+  function get() {
+    var s = copy(state);
+    s.events = copy(CATALOG);
+    s.catalog = copy(CATALOG).sort(function (a, b) { return { low: 1, medium: 2, high: 3 }[a.intensity] - { low: 1, medium: 2, high: 3 }[b.intensity]; });
+    s.suggestion = suggestion(); s.earlyWindow = earlyWindow();
+    s.storageAvailable = storageAvailable; s.storageWarning = storageWarning;
+    s.attended.forEach(function (e) { e.draft = copy(s.drafts[e.id] || blankDraft(s.now)); e.works = s.works.filter(function (w) { return w.eventId === e.id; }); });
+    s.invitations.forEach(function (i) { i.isMine = mine(i); i.conflict = conflict(i); i.visibleConfirmed = visibleConfirmed(i); i.canReply = canReply(i); i.event = inviteEvent(i); });
+    s.bookings.forEach(function (b) { b.event = copy(eventFor(b.eventId)); b.roster = rosterFor(b.eventId); });
+    s.plans = s.invitations.filter(function (i) {
+      return mine(i) && ['OPEN', 'REOPENED', 'CONFIRMED', 'BELOW_MIN', 'DONE', 'CANCELLED'].indexOf(i.state) >= 0;
+    }).map(function (i) {
+      return { type: 'group', id: 'plan-' + i.id, eventId: i.targetEventId, event: inviteEvent(i), invitationId: i.id,
+        state: i.state, attended: i.state === 'DONE', privateOnly: conflict(i), roster: visibleConfirmed(i) ? rosterFor(i.targetEventId) : [] };
+    }).concat(s.bookings.map(function (b) {
+      return { type: 'event', id: b.id, eventId: b.eventId, event: b.event, state: b.attended ? 'DONE' : 'BOOKED', attended: !!b.attended, roster: b.roster };
+    }));
+    s.progress = Math.min(4, s.attended.filter(function (e) { return s.works.some(function (w) { return w.eventId === e.id; }); }).length);
+    s.progressGoal = 4;
+    return s;
+  }
+  function persist() {
+    try { global.localStorage.setItem(KEY, JSON.stringify(state)); storageAvailable = true; if (storageWarning.indexOf('内存') >= 0) storageWarning = ''; }
+    catch (error) { storageAvailable = false; storageWarning = '本地存储不可用，当前内容暂存在本页内存；刷新后可能无法找回。'; }
+  }
+  function notify() {
+    var snapshot = get();
+    listeners.slice().forEach(function (fn) {
+      try { fn(snapshot); } catch (error) { if (global.console && global.console.error) global.console.error(error); }
+    });
+  }
+  function success(extra) { tick(); persist(); notify(); return Object.assign({ ok: true }, extra || {}); }
+  function fail(message) { return { ok: false, error: message }; }
+  function nextId(prefix) { state.sequence += 1; return prefix + '-' + state.sequence; }
+  function draftFor(e) { if (!state.drafts[e.id]) state.drafts[e.id] = blankDraft(state.now); return state.drafts[e.id]; }
+  function makeWork(eventId, source, note, auto) {
+    return { id: nextId('work'), eventId: eventId, source: source, note: limit(note), scope: 'self', auto: !!auto, createdAt: state.now };
+  }
+  function scheduleError(payload) {
+    if (!validDate(payload.date) || !validDate(payload.deadline)) return '请选择有效的活动时间和回复截止时间。';
+    if (Date.parse(payload.date) <= nowNumber()) return '活动时间需晚于当前演示时间。';
+    if (Date.parse(payload.deadline) <= nowNumber() || Date.parse(payload.deadline) >= Date.parse(payload.date)) return '回复截止需在当前时间之后、活动开始之前。';
+    if (!String(payload.place || '').trim()) return '请填写集合地点。';
+    return null;
+  }
+  function withdraw(inv, person) {
+    if (!inv.replies[person]) return false;
+    delete inv.replies[person];
+    if (['CONFIRMED', 'BELOW_MIN'].indexOf(inv.state) >= 0) {
+      inv.confirmedIds = Object.keys(inv.replies);
+      if (inv.state === 'CONFIRMED' && inv.confirmedIds.length < 3) { inv.state = 'BELOW_MIN'; inv.belowMinAt = state.now; }
+    }
+    return true;
+  }
+  function releaseConflictedCommitments() {
+    state.invitations.forEach(function (i) {
+      if (mine(i) && conflict(i) && ['CONFIRMED', 'BELOW_MIN'].indexOf(i.state) >= 0) withdraw(i, ME);
+    });
+  }
+  function nextBooked() {
+    return state.bookings.filter(function (b) { return !b.attended; }).sort(function (a, b) { return Date.parse(eventFor(a.eventId).date) - Date.parse(eventFor(b.eventId).date); })[0] || null;
+  }
+  function addAttendance(e, ids, source) {
+    if (!state.attended.some(function (old) { return old.id === e.id; })) {
+      state.attended.push(Object.assign(copy(e), { attendedAt: state.now, attendeeIds: ids.slice() }));
+      state.drafts[e.id] = blankDraft(state.now);
+      state.works.push(makeWork(e.id, source, '又来过一次，把今天好好收下。', true));
+    }
+    state.activeEventId = e.id; state.screen = 'collection';
+  }
+  function act(type, payload) {
+    payload = payload || {};
+    var inv = activeInvite(payload), e = attendedEvent(payload), d, b, person, ids, error;
+    switch (String(type).toUpperCase()) {
+      case 'NAV':
+        if (['close', 'next', 'collection'].indexOf(payload.screen) < 0) return fail('找不到这个页面。');
+        if (payload.eventId && !e) return fail('这封已参加活动的信封还不存在。');
+        state.screen = payload.screen; if (payload.eventId) state.activeEventId = payload.eventId;
+        if (payload.invitationId && inv) state.activeInvitationId = payload.invitationId;
+        return success();
+      case 'VIEW':
+        state.view = payload.view === 'host' ? 'host' : 'guest'; return success();
+      case 'PREF':
+        var changed = false;
+        if (Object.prototype.hasOwnProperty.call(payload, 'format') && ['same', 'different', 'pause'].indexOf(payload.format) < 0) return fail('请选择下一次想参加的活动形式。');
+        if (Object.prototype.hasOwnProperty.call(payload, 'company') && ['group', 'familiar', 'new'].indexOf(payload.company) < 0) return fail('请选择下一次想怎样认识同行的人。');
+        if (Object.prototype.hasOwnProperty.call(payload, 'format')) {
+          if (['same', 'different', 'pause'].indexOf(payload.format) < 0) return fail('请选择下一次想参加的活动形式。');
+          if (state.preferences.format !== payload.format) { state.preferences.format = payload.format; changed = true; }
+        }
+        if (Object.prototype.hasOwnProperty.call(payload, 'company')) {
+          if (['group', 'familiar', 'new'].indexOf(payload.company) < 0) return fail('请选择下一次想怎样认识同行的人。');
+          if (state.preferences.company !== payload.company) { state.preferences.company = payload.company; changed = true; }
+        }
+        if (changed) { state.kept = null; dismissReminders(); }
+        return success();
+      case 'SEE_AGAIN':
+        state.preferences.seeAgain = validPeople(payload.ids).filter(function (id) { return state.preferences.excluded.indexOf(id) < 0; }); return success();
+      case 'EXCLUDE':
+        state.preferences.excluded = validPeople(payload.ids);
+        state.preferences.seeAgain = state.preferences.seeAgain.filter(function (id) { return state.preferences.excluded.indexOf(id) < 0; });
+        return success();
+      case 'MUTUAL':
+        person = payload.personId || 'zhoumo';
+        if (person === ME || IDS.indexOf(person) < 0) return fail('请选择一位演示同行者。');
+        state.mutualResponses[person] = payload.yes !== false; return success();
+      case 'PREFERENCE':
+        if (['city-walk', 'workshop'].indexOf(payload.eventId) < 0) return fail('请选择漫步或工作坊。');
+        if (state.preferredDifferent !== payload.eventId) { state.preferredDifferent = payload.eventId; state.kept = null; dismissReminders(); }
+        return success();
+      case 'KEEP':
+        var rec = suggestion(), kind = payload.kind || (rec.kind === 'group' ? 'group' : rec.kind === 'event' ? 'event' : null);
+        if (kind === 'group') {
+          if (!inv || !canReply(inv)) return fail('这封邀请目前不能收取新的回应。');
+          state.kept = { kind: 'group', invitationId: inv.id, eventId: inv.targetEventId, at: state.now };
+        } else if (kind === 'event') {
+          var keepId = payload.eventId || rec.eventId;
+          if (!CATALOG.some(function (e) { return e.id === keepId; })) return fail('有合适的活动邀请时，才需要先收好。');
+          state.kept = { kind: 'event', eventId: keepId, at: state.now };
+        } else return fail('可以先把感兴趣的主题收好。');
+        return success();
+      case 'RSVP':
+        if (!inv) return fail('这封邀请不存在。');
+        person = payload.personId || ME;
+        if (inv.eligibleIds.indexOf(person) < 0) return fail('这封邀请只寄给上一场的同行者。');
+        if (payload.yes === false) {
+          if (['EXPIRED', 'CANCELLED', 'DONE'].indexOf(inv.state) >= 0) return fail('这场活动的回应已归档。');
+          return success({ changed: withdraw(inv, person), invitationId: inv.id });
+        }
+        if (inv.replies[person]) return success({ changed: false, invitationId: inv.id });
+        if (person === ME && conflict(inv)) return fail('先看看为你保留的其他相见方式。');
+        if (['OPEN', 'REOPENED', 'CONFIRMED'].indexOf(inv.state) < 0 || nowNumber() >= Date.parse(inv.deadline)) return fail('这封邀请已经停止收取回应。');
+        inv.replies[person] = true; ids = Object.keys(inv.replies);
+        if (person === ME) dismissReminders(inv.id);
+        if (['OPEN', 'REOPENED'].indexOf(inv.state) >= 0 && ids.length >= 3) { inv.state = 'CONFIRMED'; inv.confirmedAt = state.now; inv.confirmedIds = ids; }
+        else if (inv.state === 'CONFIRMED') inv.confirmedIds = ids;
+        return success({ changed: true, invitationId: inv.id });
+      case 'CLOCK':
+        var requested = payload.now || payload.preset, nextTime = PRESETS[requested] || requested;
+        if (requested === 'meeting') nextTime = inv ? inv.date : PRESETS.meeting;
+        if (requested === 'attendance') {
+          b = nextBooked();
+          if (b) nextTime = new Date(Math.max(nowNumber(), Date.parse(eventFor(b.eventId).date))).toISOString();
+          else if (inv && inv.state === 'CONFIRMED' && mine(inv)) nextTime = new Date(Math.max(nowNumber(), Date.parse(inv.date))).toISOString();
+          else return fail('先收好一场行程，再模拟到场时间。');
+        }
+        if (requested === 'after24h') {
+          var lastDone = state.invitations.slice().reverse().find(function (i) { return i.state === 'DONE'; });
+          if (!lastDone || !lastDone.doneAt) return fail('先完成原组活动签到，再往后拨 24 小时。');
+          nextTime = new Date(Date.parse(lastDone.doneAt) + 86400000).toISOString();
+        }
+        if (!validDate(nextTime)) return fail('演示时间无效。');
+        state.now = nextTime; return success({ eventId: b ? b.eventId : null });
+      case 'SELECT':
+        if (!e || e.photos.indexOf(payload.source) < 0) return fail('请选择这次活动的一张画面。');
+        d = draftFor(e);
+        if (d.source !== payload.source) { d.source = payload.source; d.stamped = false; d.dirty = true; d.updatedAt = state.now; }
+        return success();
+      case 'STAMP':
+        if (!e) return fail('先打开一封已参加活动的信封。');
+        d = draftFor(e); if (!d.source) return fail('先选一个画面，再做成邮票。');
+        if (!d.stamped) { d.stamped = true; d.dirty = true; d.updatedAt = state.now; } return success();
+      case 'NOTE':
+        if (!e) return fail('先打开一封已参加活动的信封。');
+        d = draftFor(e); var note = limit(payload.note);
+        if (d.note !== note) { d.note = note; d.dirty = true; d.updatedAt = state.now; } return success();
+      case 'SAVE':
+        if (!e) return fail('先打开一封已参加活动的信封。');
+        d = draftFor(e); if (!d.source || !d.stamped) return fail('先做成一枚邮票，再收进纪念盒。');
+        var w = state.works.find(function (w) { return w.id === d.lastSavedWorkId; });
+        if (!w || w.source !== d.source || w.note !== d.note) { w = makeWork(e.id, d.source, d.note, false); state.works.push(w); }
+        d.dirty = false; d.lastSavedWorkId = w.id;
+        if (payload.screen && ['close', 'next', 'collection'].indexOf(payload.screen) >= 0) state.screen = payload.screen;
+        return success({ workId: w.id });
+      case 'SHARE':
+        var sharedWork = state.works.find(function (w) { return w.id === payload.workId; });
+        if (!sharedWork) return fail('这件作品还没有收藏。');
+        if (['self', 'group'].indexOf(payload.destination) < 0) return fail('请选择寄出范围。');
+        sharedWork.scope = payload.destination; sharedWork.sharedAt = state.now;
+        return success({ workId: sharedWork.id, destination: sharedWork.scope });
+      case 'BOOK':
+        var bookingId = payload.eventId || suggestion().eventId;
+        var catalogEvent = CATALOG.find(function (e) { return e.id === bookingId; });
+        if (!catalogEvent) return fail('请选择一场可预订的演示活动。');
+        b = state.bookings.find(function (b) { return b.eventId === bookingId; });
+        if (b) { releaseConflictedCommitments(); return success({ changed: false, bookingId: b.id, eventId: b.eventId }); }
+        if (nowNumber() < Date.parse(PRESETS.day2)) return fail('老朋友预订将于 11 月 16 日 12:00 开放，可以先收好这场邀请。');
+        if (nowNumber() >= Date.parse(catalogEvent.date)) return fail('这场活动已开始，可以等下一次合适的邀请。');
+        var selected = suggestion(), matched = selected.kind === 'event' && selected.eventId === bookingId ? selected.mutualId || null : null;
+        b = { id: nextId('booking'), eventId: bookingId, createdAt: state.now, attended: false, attendedAt: null, rosterMode: matched ? 'familiar' : 'new', mutualId: matched };
+        state.bookings.push(b);
+        releaseConflictedCommitments();
+        dismissReminders(); return success({ changed: true, bookingId: b.id, eventId: b.eventId });
+      case 'SCAN':
+        var groupScan = payload.kind === 'group' || !!payload.invitationId || (!payload.eventId && !nextBooked() && inv && mine(inv));
+        if (groupScan) {
+          if (!inv) return fail('这封邀请不存在。');
+          if (inv.state === 'DONE' && inv.scanIds.indexOf(ME) >= 0) return success({ changed: false, eventId: inv.targetEventId });
+          if (inv.state !== 'CONFIRMED' || !mine(inv) || conflict(inv)) return fail('只有已成行活动的同行者可以签到。');
+          if (nowNumber() < Date.parse(inv.date)) return fail('还没到集合时间，先把这场行程收好。');
+          inv.state = 'DONE'; inv.doneAt = state.now; inv.scanIds = [ME]; inv.confirmedIds = Object.keys(inv.replies);
+          addAttendance(inviteEvent(inv), inv.confirmedIds, inv.kind === 'dinner' ? 'dessert' : 'bridge');
+          return success({ changed: true, eventId: inv.targetEventId, invitationId: inv.id });
+        }
+        b = payload.eventId ? state.bookings.find(function (b) { return b.eventId === payload.eventId; }) : nextBooked();
+        if (!b) return fail('先订一场活动，再模拟到场签到。');
+        if (b.attended) return success({ changed: false, eventId: b.eventId });
+        var bookedEvent = eventFor(b.eventId);
+        if (nowNumber() < Date.parse(bookedEvent.date)) return fail('还没到这场活动的集合时间。');
+        b.attended = true; b.attendedAt = state.now;
+        addAttendance(bookedEvent, rosterFor(b.eventId).map(function (p) { return p.id; }), bookedEvent.kind === 'dinner' ? 'dessert' : bookedEvent.kind === 'walk' ? 'bridge' : 'window');
+        return success({ changed: true, eventId: b.eventId });
+      case 'HOST_CANCEL':
+        if (state.view !== 'host' || !inv || inv.state !== 'BELOW_MIN') return fail('请由主理人处理需要重新安排的行程。');
+        inv.state = 'CANCELLED'; inv.cancelledAt = state.now; return success();
+      case 'HOST_RESCHEDULE':
+        if (state.view !== 'host' || !inv || inv.state !== 'BELOW_MIN') return fail('只有主理人可以处理这次改期。');
+        error = scheduleError(payload); if (error) return fail(error);
+        if (Object.prototype.hasOwnProperty.call(payload, 'kind') && ['dinner', 'walk'].indexOf(payload.kind) < 0) return fail('请选择晚餐或漫步。');
+        if (Object.prototype.hasOwnProperty.call(payload, 'title') && !String(payload.title || '').trim()) return fail('请填写新的活动名称。');
+        if (!inv.replyHistory) inv.replyHistory = [];
+        inv.replyHistory.push({ replies: copy(inv.replies), date: inv.date, deadline: inv.deadline, kind: inv.kind, title: inv.title, at: state.now });
+        inv.date = payload.date; inv.deadline = payload.deadline; inv.place = String(payload.place).trim().slice(0, 80);
+        if (Object.prototype.hasOwnProperty.call(payload, 'kind')) inv.kind = payload.kind;
+        if (Object.prototype.hasOwnProperty.call(payload, 'title')) inv.title = String(payload.title).trim().slice(0, 45);
+        inv.route = inv.kind === 'dinner' ? '接着聊，上次没讲完的故事。' : '一起沿河看看建筑，走向下一段风景。';
+        inv.quote = inv.kind === 'dinner' ? '换个时间，再和这一桌的人好好吃顿饭。想好后，私下告诉我。' : '换个时间，也换一种相见。一起走一段路，想好后私下告诉我。';
+        inv.state = 'REOPENED'; inv.replies = {}; inv.confirmedIds = []; inv.confirmedAt = null; inv.reminderAt = null; inv.revision += 1;
+        dismissReminders(inv.id); return success();
+      case 'SEND_NEXT':
+        if (!inv || inv.state !== 'DONE') return fail('先完成这次原组同行，再寄出下一封邀请。');
+        if (inv.nextSentAt) return fail('这次同行的下一封邀请已经寄出。');
+        var isHost = state.view === 'host', canRelay = mine(inv) && inv.doneAt && nowNumber() >= Date.parse(inv.doneAt) + 86400000;
+        if (!isHost && !canRelay) return fail('主理人可以先寄出；24 小时后仍未寄出，同行者也可以接力。');
+        error = scheduleError(payload); if (error) return fail(error);
+        var newKind = payload.kind === 'walk' ? 'walk' : 'dinner';
+        var next = { id: nextId('invite'), sourceEventId: inv.targetEventId, targetEventId: nextId('event'), kind: newKind,
+          title: String(payload.title || (newKind === 'dinner' ? '原组再聚 · 下一桌' : '原组再聚 · 下一段路')).slice(0, 45),
+          date: payload.date, deadline: payload.deadline, place: String(payload.place).trim().slice(0, 80),
+          route: newKind === 'dinner' ? '接着聊，上一次没讲完的故事。' : '换一种方式，和熟悉的人再相见。',
+          quote: '这次先把相见收好。下一次，还想和你们一起。',
+          state: 'OPEN', replies: {}, confirmedIds: [], eligibleIds: inv.confirmedIds.filter(function (id) { return state.preferences.excluded.indexOf(id) < 0; }),
+          hostId: isHost ? inv.hostId || HOST : ME, createdAt: state.now, reminderAt: null, doneAt: null, nextSentAt: null, nextInvitationId: null, scanIds: [], revision: 0 };
+        inv.nextSentAt = state.now; inv.nextInvitationId = next.id; state.invitations.push(next); state.activeInvitationId = next.id;
+        state.activeEventId = inv.targetEventId; return success({ invitationId: next.id });
+      case 'INVITE_FORMAT':
+        if (!inv || ['OPEN', 'REOPENED'].indexOf(inv.state) < 0) return fail('先重置演示，再切换原组邀请形式。');
+        if (['dinner', 'walk'].indexOf(payload.kind) < 0) return fail('请选择晚餐或漫步。');
+        if (inv.kind === payload.kind) return success({ changed: false });
+        inv.kind = payload.kind; inv.title = inv.kind === 'dinner' ? '原组再聚 · 暖灯晚餐' : '原组再聚 · 河口漫步';
+        inv.date = inv.kind === 'dinner' ? PRESETS.meeting : '2026-11-21T15:30:00+08:00';
+        inv.place = inv.kind === 'dinner' ? '静安 · 微光餐厅（虚构）' : '乍浦路桥北侧';
+        inv.route = inv.kind === 'dinner' ? '接着聊，上次没讲完的故事。' : '沿苏州河步行至外白渡桥';
+        inv.quote = inv.kind === 'dinner' ? '下一次，要不要还和这一桌的人，再好好吃顿饭？' : '下一次，要不要和这一桌的人，一起沿河走到外白渡桥？';
+        inv.state = 'REOPENED'; inv.replies = {}; inv.confirmedIds = []; inv.revision += 1; dismissReminders(inv.id); state.kept = null;
+        return success({ changed: true });
+      case 'INTEREST':
+        var values = Array.isArray(payload.themes) ? payload.themes : [];
+        values = values.map(function (t) { return String(t).trim().slice(0, 40); }).filter(function (t, i, all) { return t && all.indexOf(t) === i; }).slice(0, 8);
+        if (!values.length) return fail('先选一个感兴趣的主题。');
+        state.interest = values.map(function (theme) { return { theme: theme, createdAt: state.now }; }); return success();
+      case 'DISMISS_REMINDER':
+        var reminder = state.reminders.find(function (r) { return r.id === payload.id; });
+        if (reminder) { reminder.dismissed = true; reminder.dismissedAt = state.now; } return success();
+      case 'RESET': return reset();
+      default: return fail('不支持这个演示操作。');
+    }
+  }
+  function reset() {
+    try { global.localStorage.removeItem(KEY); } catch (error) { storageAvailable = false; }
+    state = initial(); storageWarning = ''; return success();
+  }
+  function subscribe(fn) {
+    if (typeof fn !== 'function') return function () {};
+    listeners.push(fn); return function () { var i = listeners.indexOf(fn); if (i >= 0) listeners.splice(i, 1); };
+  }
+  tick(); persist();
+  global.EncoreEngine = {
+    get: get, act: act, subscribe: subscribe, reset: reset,
+    rosterFor: function (id) { return copy(rosterFor(id)); },
+    constants: { KEY: KEY, ME: ME, HOST: HOST, PEOPLE: copy(PEOPLE), NEW_PEOPLE: copy(NEW_PEOPLE), CATALOG: copy(CATALOG), DINNER: copy(DINNER), PRESETS: copy(PRESETS), STATES: STATES.slice(), THEMES: THEMES.slice() }
+  };
+})(window);
+
+</script>
+<script>
+(function(){
+'use strict';
+var E=window.EncoreEngine,ME='linxia',busy=false,suppress=false,openedEvent=null,modalState=null,toastTimer,sealTimer,prevStates={},pendingSeals=[];
+var people=E.constants.PEOPLE,art={},crops={},artNames={neon:'餐厅霓虹招牌',dessert:'烛光里的甜点',window:'邮政大楼窗格',bridge:'苏州河桥影'},topics=['城市与建筑','手作与创作','社区与志愿','轻松晚餐'];
+function $(s){return document.querySelector(s)}
+function $$(s){return Array.from(document.querySelectorAll(s))}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function icon(n){return '<svg class="icon" aria-hidden="true"><use href="#i-'+n+'"/></svg>'}
+function state(){return E.get()}
+function ev(id){var s=state();return s.attended.find(e=>e.id===(id||s.activeEventId))||s.events.find(e=>e.id===(id||s.activeEventId))||E.constants.DINNER}
+function inv(id){var s=state();return s.invitations.find(i=>i.id===(id||s.activeInvitationId))}
+function yes(i){return !!i.replies[ME]}
+function conflict(i){return i.confirmedIds.some(id=>state().preferences.excluded.includes(id))}
+function visibleConfirmed(i){return yes(i)&&['CONFIRMED','DONE'].includes(i.state)&&!conflict(i)}
+function person(id){return (people.find(p=>p.id===id)||{name:'同行者'}).name}
+function draft(id){return state().drafts[id||state().activeEventId]||{source:null,stamped:false,note:'',dirty:false}}
+function works(id){return state().works.filter(w=>w.eventId===id)}
+function fmt(iso,time){return new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',month:'long',day:'numeric',weekday:'short',hour:time?'2-digit':undefined,minute:time?'2-digit':undefined,hour12:false}).format(new Date(iso))}
+function day(iso){return new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(iso)).replace(/\//g,'.')}
+function toast(t){clearTimeout(toastTimer);$('#toast').textContent=t;$('#toast').classList.add('show');toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),2900)}
+function act(type,payload,quiet){suppress=true;var r;try{r=E.act(type,payload||{})}finally{suppress=false}if(!r.ok){toast(r.error||'这一步暂时无法完成。');return r}if(quiet)chrome();else render();return r}
+var sources=Object.assign({},window.ENCORE_ART,window.ENCORE_DINNER_ART);
+Object.keys(artNames).forEach(k=>{var svg=sources[k];art[k]='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);crops[k]='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg.replace('width="640" height="420"','width="240" height="300"').replace('viewBox="0 0 640 420"','viewBox="200 80 240 300"'))});
+var maskPath='M0 0H100V124H0Z';function hole(x,y){maskPath+=' M'+(x-3)+' '+y+'a3 3 0 1 0 6 0a3 3 0 1 0-6 0Z'}for(var x=5;x<100;x+=10){hole(x,0);hole(x,124)}for(var y=7;y<124;y+=10){hole(0,y);hole(100,y)}
+document.documentElement.style.setProperty('--stamp-mask','url("data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 124" preserveAspectRatio="none"><path fill="white" fill-rule="evenodd" d="'+maskPath+'"/></svg>')+'")');
+ function stamp(source){return '<div class="stamp" aria-label="'+artNames[source]+'制成的齿边邮票"><img src="'+crops[source]+'" alt="'+artNames[source]+'的局部裁切"><div class="stamp-type"><span>Encore · 留念</span><b>沪</b></div></div>';}
+ function memory(w,event){
+  var source=w.source||(event.id==='dinner12'?'neon':'window'),stamped=!!w.id||w.stamped,note=w.note||'';
+  return '<article class="memory-paper" aria-label="'+(w.id?'已收藏的':'制作中的')+'明信片"><div class="memory-head"><span>'+esc(event.title)+'</span><span>寄给未来的自己</span></div><div class="memory-content"><div class="memory-scene"><img src="'+art[source]+'" alt="'+artNames[source]+'完整画面"></div><div class="memory-text"><small>致：愿意再出发的自己</small><p class="memory-note'+(!note?' empty':'')+'">'+(note?esc(note):'把今晚的一句话，留在这里。')+'</p><div class="memory-lines" aria-hidden="true"></div></div></div><div class="stamp-target">'+(stamped?stamp(source):'<div class="stamp-placeholder">'+icon('stamp')+'<span>你的邮票，贴这里</span></div>')+'</div>'+(stamped?'<div class="finished-mark"><div class="postmark" aria-hidden="true">上海 · 留念<b>'+day(event.date)+'</b>Encore · 再来一场</div></div>':'')+'<div class="memory-foot"><span>上海 · 一段相遇</span><span>'+day(event.date)+' / Encore</span></div></article>';
+ }
+ function fit(){
+  $$('.memory-paper').forEach(function(p){if(!p.offsetWidth)return;var c=p.querySelector('.memory-content'),t=p.querySelector('.memory-text'),st=p.querySelector('.stamp-target'),cs=getComputedStyle(c),ratio=getComputedStyle(p).aspectRatio.split('/').map(Number),top=parseFloat(cs.top),bottom=parseFloat(cs.bottom),reserve=Math.max(15,st.offsetTop+st.offsetHeight-top+13);p.style.height=Math.ceil(Math.max(p.clientWidth/(ratio[0]/(ratio[1]||1)),t.offsetHeight+top+bottom+reserve))+'px';});
+ }
+ addEventListener('resize',function(){requestAnimationFrame(fit);});
+ function material(source,d){var selected=d.source===source;return '<button class="material" data-action="select" data-source="'+source+'" aria-pressed="'+selected+'"><div class="material-picture"><div class="source-preview"><img src="'+art[source]+'" alt="'+artNames[source]+'完整画面"><span class="crop-guide" aria-hidden="true"></span></div></div><span class="material-name">'+artNames[source]+'<span class="selection" aria-hidden="true">'+(selected?'✓':'')+'</span></span></button>';}
+ function intensity(e){var n={low:1,medium:2,high:3}[e.intensity]||1,label=e.socialIntensity||{low:'低',medium:'中',high:'高'}[e.intensity];return '<div class="intensity" aria-label="社交强度'+label+'"><span>社交强度</span><span class="bars" aria-hidden="true">'+[1,2,3].map(function(i){return '<i class="'+(i<=n?'on':'')+'"></i>';}).join('')+'</span><b>'+label+'</b></div>';}
+ function eventArt(e){if(e.id==='new-table')return '<img src="'+art.dessert+'" alt="烛光里的甜点和新的一桌">';if(e.id==='city-walk')return '<img src="'+art.bridge+'" alt="城市漫步，沿河走过桥影">';if(e.id==='workshop')return '<svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg" aria-label="橡皮章与刻刀的暖色插画"><path fill="#f8e5bf" d="M0 0h360v160H0z"/><path d="M40 128h280" stroke="#b97d50"/><g transform="translate(111 28) rotate(-9 70 50)"><rect width="124" height="94" rx="3" fill="#d9773e" stroke="#873e2d" stroke-width="2"/><rect x="10" y="10" width="104" height="74" fill="#fffaf0" stroke="#873e2d"/><path d="M27 59q35-72 70 0M27 59h70M45 59V35m36 24V35M36 45l18 14 28-25" fill="none" stroke="#b84432" stroke-width="3"/></g><path d="m256 41 14 7-33 75-10-5z" fill="#f2cb54" stroke="#873e2d" stroke-width="2"/><path d="m227 118-3 15 13-10" fill="#873e2d"/><path d="M71 61h17m-9-9v18m197 51h15" stroke="#b84432" stroke-width="2"/></svg>';return '<svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg" aria-label="社区书架的暖色插画"><path fill="#f8e5bf" d="M0 0h360v160H0z"/><path d="M53 128h255M63 123V34h230v89" fill="none" stroke="#873e2d" stroke-width="2"/><path d="M79 56h25v64H79z" fill="#b84432"/><path d="M108 48h21v72h-21z" fill="#f2cb54"/><path d="m138 56 19-5 18 65-20 5z" fill="#d9773e"/><path d="M191 42h28v78h-28z" fill="#f2cb54"/><path d="M223 66h21v54h-21z" fill="#b84432"/><path d="M248 56h25v64h-25z" fill="#d9773e"/><path d="M84 67h15m15-8h10m73-5h16m16 23h9m15-10h15" stroke="#fffaf0" stroke-width="2"/></svg>';}
+ function earlyStrip(){
+  var e=state().earlyWindow,ms=Math.max(0,e.remainingMs),hours=Math.floor(ms/3600000),minutes=Math.floor(ms%3600000/60000);
+  if(Date.parse(state().now)<Date.parse(e.startsAt))return '<div class="priority-strip"><strong>老朋友优先 72 小时</strong><span>'+fmt(e.startsAt,true)+'开启</span></div>';
+  return '<div class="priority-strip"><strong>老朋友优先 72 小时</strong><span>'+(e.ended?'优先期已结束':'剩余 '+hours+' 小时 '+String(minutes).padStart(2,'0')+' 分')+'</span></div>';
+ }
+ function envelope(event){
+  var ws=works(event.id),w=ws.slice(-1)[0],d=draft(event.id),source=w?w.source:d.stamped?d.source:null;
+  return '<button class="envelope" data-action="open-envelope" data-event="'+event.id+'" aria-label="打开'+esc(event.title)+'活动信封"><svg class="flap" viewBox="0 0 400 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0H400L209 106Q200 112 191 106Z"/></svg><span class="envelope-label">Encore · 活动信封</span><span class="envelope-address"><small>致：今天的自己</small><h2>'+esc(event.title)+'</h2><p>'+fmt(event.date,false)+' · 上海</p></span>'+(source?'<span class="envelope-stamp">'+stamp(source)+'</span>':'')+'<span class="envelope-seal" aria-hidden="true">t.</span><span class="envelope-open">轻轻拆开，回到那一天'+icon('arrow')+'</span></button>';
+ }
+ async function makeStamp(){
+  var event=ev(),d=draft(event.id);if(busy||!d.source||d.stamped)return;
+  busy=true;$$('button').forEach(function(b){b.dataset.wasDisabled=b.disabled?'true':'false';b.disabled=true;});
+  $('#transform-status').textContent='裁下这一角，再为它加上邮票齿边…';
+  var target=$('#studio-postcard .stamp-target'),r=target.getBoundingClientRect();if(r.top<70||r.bottom>innerHeight-40)scrollTo({top:Math.max(0,$('.workbench').getBoundingClientRect().top+scrollY-75),behavior:'instant'});
+  var start=$('.material[data-source="'+d.source+'"] .crop-guide').getBoundingClientRect(),end=target.getBoundingClientRect(),fly=document.createElement('div'),w=Math.max(57,start.width),h=w*1.25;
+  fly.className='floating-stamp';fly.innerHTML=stamp(d.source);Object.assign(fly.style,{left:start.left+'px',top:start.top+'px',width:w+'px',height:h+'px'});document.body.appendChild(fly);
+  try{
+   if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&fly.animate){
+    await fly.animate([{opacity:.2,transform:'rotate(0) scale(1)'},{opacity:1,transform:'rotate(-8deg) scale(1.2)'}],{duration:380,easing:'ease-out',fill:'forwards'}).finished;
+    $('#transform-status').textContent='邮票做好了。现在，贴到明信片右上角。';
+    await fly.animate([{left:start.left+'px',top:start.top+'px',width:w+'px',height:h+'px',transform:'rotate(-8deg) scale(1.2)'},{left:end.left+'px',top:end.top+'px',width:end.width+'px',height:end.height+'px',transform:'rotate(5deg) scale(1)'}],{duration:800,easing:'cubic-bezier(.4,0,.2,1)',fill:'forwards'}).finished;
+   }
+   act('STAMP',{eventId:event.id},true);
+  }finally{fly.remove();busy=false;$$('button[data-was-disabled]').forEach(function(b){b.disabled=b.dataset.wasDisabled==='true';delete b.dataset.wasDisabled;});render();}
+ }
+function choiceRows(kind,presenter){
+ var pref=state().preferences,value=pref[kind],labels=kind==='format'?{same:['再来一场晚餐','保留熟悉的活动形式。'],different:['试试其他形式','散步、手作，也可以是相见。'],pause:['先歇一歇','先不安排，合适的时候再来。']}:{group:['原来的小组','如果大家也愿意，就再聚一次。'],familiar:['一位熟面孔','和想再见的人，也认识新朋友。'],new:['认识新朋友','给下一次相遇，留一点新鲜。']};
+ return '<div class="format-choices" role="group" aria-label="'+(kind==='format'?'活动形式偏好':'同行关系偏好')+'">'+Object.keys(labels).map(function(k){return '<button class="format-choice" data-action="preference" data-field="'+kind+'" data-value="'+k+'" aria-pressed="'+(value===k)+'"><span>'+labels[k][0]+(!presenter?'<small>'+labels[k][1]+'</small>':'')+'</span><span class="selection" aria-hidden="true">'+(value===k?'✓':'')+'</span></button>';}).join('')+'</div>';
+}
+function privatePeople(kind){
+ var p=state().preferences,selected=kind==='see-again'?p.seeAgain:p.excluded;
+ return '<div class="people-choices" role="group" aria-label="'+(kind==='see-again'?'选择想再见的人':'选择私密排除')+'">'+people.filter(function(x){return x.id!==ME&&!(kind==='see-again'&&p.excluded.includes(x.id));}).map(function(x){var on=selected.includes(x.id);return '<button class="people-choice" data-action="'+kind+'" data-person="'+x.id+'" aria-pressed="'+on+'"><span>'+esc(x.name)+'</span><span class="selection" aria-hidden="true">'+(on?'✓':'')+'</span></button>';}).join('')+'</div>';
+}
+function closePage(){
+ var event=ev(),d=draft(event.id),initial=event.id==='dinner12',photos=event.photos||['dessert','neon'];
+ var html='<section id="page-close" aria-labelledby="page-title"><p class="eyebrow">'+esc(event.title)+' · 散场之后</p><h1 id="page-title" tabindex="-1">'+(initial?'把这一次收好，<br>给下一次留点余地。':'每一次来过，<br>都值得好好留念。')+'</h1><p class="intro">一张纪念，留下今天。<br>下一次的形式和同行的人，都按你的心意。</p><div class="workbench"><span class="bench-label">Encore · 给自己留一点此刻</span><div id="studio-postcard">'+memory(d,event)+'</div><span class="bench-caption">'+(d.stamped?'这一角，变成了属于你的邮票。':'从画面里裁下一角，贴在回忆的右上角。')+'</span></div><div class="control-label"><span><i class="n">01</i>选一个想留下的画面</span><small>内置画面</small></div><div class="materials">'+photos.map(s=>material(s,d)).join('')+'</div><button id="make-stamp" class="btn secondary full" data-action="stamp" '+(!d.source||d.stamped?'disabled':'')+'>'+icon('cut')+'<span>'+(d.stamped?'已贴到明信片':'做成邮票')+'</span></button><div id="transform-status" class="transform-status" role="status">'+(d.stamped?'画面的一角，已经贴在明信片上。':'先选一个画面，再做成自己的邮票。')+'</div><div class="note-control"><label class="control-label" for="note"><span><i class="n">02</i>留一句给今天</span><small>选填</small></label><textarea id="note" maxlength="120" rows="2" placeholder="比如：很高兴，这一次我来过。">'+esc(d.note)+'</textarea><div class="input-meta"><span id="draft-state">'+(d.dirty?'草稿已自动保存':'纪念默认仅自己可见')+'</span><span><span id="note-count">'+Array.from(d.note).length+'</span> / 60</span></div></div><button id="save-memory" class="btn full" data-action="save" '+(!d.stamped?'disabled':'')+'>'+icon('box')+'收进纪念盒'+icon('arrow')+'</button>';
+ if(initial)html+='<div id="return-intent" class="question-block"><p class="eyebrow">两件事，可以分别选择</p><h2>下一次，想怎么相见？</h2><p class="intro">喜欢活动，和喜欢这组人，不一定是同一个答案。</p><div class="control-label"><span>活动形式</span><small>这场晚餐之后</small></div>'+choiceRows('format')+'</div><div class="question-block"><h2>又想和谁一起？</h2><p class="intro">想换形式，也不必换掉想再见的人。</p>'+choiceRows('company')+(state().preferences.company==='familiar'?'<p class="small muted" style="margin-top:18px">选填，可多选。只有双方都选了才会告知。</p>'+privatePeople('see-again'):'')+'</div><button class="text-btn full" data-action="exclusions">私密设置：下次不想同组的人</button><p class="private-footer">'+icon('lock')+'<span>你的回答只用于安排下一次，不会给主理人或其他人看。</span></p><button class="btn full" data-action="nav" data-screen="next">看看我的下一次相见'+icon('arrow')+'</button>';
+ return html+'<button class="text-btn full" data-action="nav" data-screen="collection">打开我的 Encore</button></section>';
+}
+function details(e,deadline){
+ return '<div class="detail">'+icon('time')+'<div>'+fmt(e.date,true)+'<small>上海时间'+(e.durationMinutes?' · '+e.durationMinutes/60+' 小时':'')+'</small></div></div><div class="detail">'+icon('pin')+'<div>'+esc(e.place)+'</div></div>'+(deadline?'<p class="deadline">'+icon('time')+'回复截止：'+fmt(deadline,true)+'</p>':'');
+}
+function groupCard(i,dialogMode){
+ if(conflict(i)){
+  var archived=i.state==='DONE',canWithdraw=yes(i)&&['OPEN','REOPENED','CONFIRMED','BELOW_MIN'].includes(i.state);
+  return '<article class="suggestion-card group-card" data-suggestion-card data-kind="group"><span class="yellow-tag">'+(archived?'已完成的相见':'我的私下回应')+'</span><h2>'+esc(i.title)+'</h2>'+details(i)+'<div class="own-status"><span>'+(archived?'你已参加这次活动':'本人的回应仍已保留')+'<small>这里只显示你自己的记录。</small></span></div>'+(canWithdraw?'<p class="reason">你可以撤回这次回应，也可以再看看其他合适的相见方式。</p><button class="btn full" data-action="withdraw" data-invite="'+i.id+'">撤回我的回应</button>':'')+(archived?'<button class="btn full" data-action="open-envelope" data-event="'+i.targetEventId+'">打开这次的纪念'+icon('box')+'</button>':'<button class="text-btn full" data-action="nav" data-screen="next">看看其他相见方式</button>')+'</article>';
+ }
+ var confirmed=visibleConfirmed(i),open=['OPEN','REOPENED','CONFIRMED'].includes(i.state),html='<article class="suggestion-card group-card" data-suggestion-card data-kind="group"><span class="yellow-tag">'+(confirmed?'已成行 · 再次相见':'原组的下一封邀请')+'</span><h2>'+esc(i.title)+'</h2><p class="letter-to">致：那晚一起坐过的你们</p><p class="group-quote">'+esc(i.quote||'下一次相见，约在'+fmt(i.date,true)+'。想好后，私下告诉我。')+'</p><div class="suggestion-art"><img src="'+art[i.kind==='walk'?'bridge':'dessert']+'" alt="'+(i.kind==='walk'?'河岸与桥影':'烛光里的甜点')+'"></div>'+details(i,i.deadline)+'<div class="privacy-rule">'+icon('lock')+'<span>三人确认即成行，确认前没人能看到谁回复了</span></div>';
+ if(confirmed)html+='<div class="confirmed-panel"><h3>'+icon('check')+(i.state==='DONE'?'这段相见，已完成。':'已成行，一起赴约。')+'</h3><p class="confirmed-names">'+i.confirmedIds.map(person).map(esc).join('、')+'</p><small>仅确认同行的人可见</small></div>';
+ if(yes(i)){
+  html+='<div class="own-status"><span>'+(i.state==='BELOW_MIN'?'行程待主理人处理':i.state==='CANCELLED'?'本次行程已取消':i.state==='DONE'?'已完成这次相见':'已私下回应')+'<small>'+(!confirmed&&open?'成行后，在这里告诉你。':'行程也收在「我的 Encore」里。')+'</small></span></div>';
+  if(i.state==='CONFIRMED'&&Date.parse(state().now)>=Date.parse(i.date))html+='<button class="btn full" data-action="scan-group" data-invite="'+i.id+'">'+icon('scan')+'模拟集合点签到</button>';
+  else if(i.state==='DONE')html+='<button class="btn full" data-action="open-envelope" data-event="'+i.targetEventId+'">打开这次的纪念'+icon('box')+'</button>';
+  else html+='<button class="btn full" data-action="nav" data-screen="collection">查看我的行程'+icon('arrow')+'</button>';
+  if(open)html+='<button class="text-btn full" data-action="withdraw" data-invite="'+i.id+'">撤回我的回应</button>';
+ }else if(open&&Date.parse(state().now)<Date.parse(i.deadline)){
+  html+='<div class="actions"><button id="private-yes" class="btn" data-action="rsvp" data-invite="'+i.id+'">这场我能来'+icon('arrow')+'</button><button class="btn secondary" data-action="keep-group" data-invite="'+i.id+'">先收好</button></div>';
+ }else html+='<p class="small muted">这段邀请已收好，纪念一直都在。</p>';
+ if(!dialogMode)html+='<button class="text-btn full" data-action="change-intent">换一种相见方式</button>';
+ return html+'</article>';
+}
+function eventCard(r){
+ var s=state(),e=r.event,booked=s.bookings.some(b=>b.eventId===e.id),bookingOpen=Date.parse(s.now)>=Date.parse(s.earlyWindow.startsAt);
+ return earlyStrip()+'<article class="suggestion-card" data-suggestion-card data-kind="event" data-event="'+e.id+'"><span class="yellow-tag">'+(r.reveal?'一位熟面孔，也有新朋友':'给你的一场 · 按你的节奏')+'</span><h2>'+esc(r.title)+'</h2>'+(r.title!==e.title?'<p class="event-subtitle">'+esc(e.title)+'</p>':'')+'<div class="suggestion-art">'+eventArt(e)+'</div>'+(r.reveal?'<div class="mutual-note">'+esc(r.reveal)+'</div>':'')+intensity(e)+details(e)+'<p class="reason">'+esc(r.reason)+'</p><div class="actions"><button id="book-event" class="btn" data-action="'+(booked?'nav':'book')+'" data-screen="collection" data-event="'+e.id+'" '+(!booked&&!bookingOpen?'disabled':'')+'>'+(booked?'查看我的行程':bookingOpen?'订这一场':'11月16日12:00开放')+(booked||bookingOpen?icon('arrow'):'')+'</button><button class="btn secondary" data-action="keep-event" data-event="'+e.id+'">先收好</button></div><button class="text-btn full" data-action="catalog">看看别的活动</button></article>';
+}
+function quietCard(r){
+ var group=r.kind==='group-interest',series=r.kind==='series';
+ return '<article class="suggestion-card" data-suggestion-card data-kind="'+r.kind+'"><span class="yellow-tag">'+(group?'原组的另一种可能':series?'新系列':'兴趣清单')+'</span><h2>'+esc(r.title)+'</h2><div class="quiet-sun" aria-hidden="true"><span>e.</span></div><p class="reason">'+esc(r.reason)+'</p><button class="btn secondary full" data-action="interest" data-group="'+group+'">'+(group?'私下收好这个想法':'挑一个感兴趣的主题')+'</button>'+(group?'<button class="text-btn full" data-action="catalog">也看看可参加的其他活动</button>':'')+'<button class="text-btn full" data-action="nav" data-screen="collection">先翻翻我的 Encore</button></article>';
+}
+function nextPage(){
+ var r=state().suggestion,html='<section id="page-next" aria-labelledby="page-title"><p class="eyebrow">一个适合你的下一次</p><h1 id="page-title" tabindex="-1">下一次相见，<br>也可以不一样。</h1><p class="intro">形式、同行的人、愿不愿意再来。<br>让每一种答案，都有自己的去处。</p>';
+ if(r.kind==='waiting')html+='<div class="book-empty">先分别选一选形式和同行偏好。<br>只给你一张适合的邀请。</div><button class="btn secondary full" style="margin-top:20px" data-action="change-intent">写下我的下一次意向'+icon('arrow')+'</button>';
+ else if(r.kind==='group')html+=groupCard(inv(r.invitationId),false);
+ else html+=r.kind==='event'?eventCard(r):quietCard(r);
+ return html+'</section>';
+}
+function planRows(){
+ var plans=state().plans,html='<div class="section-label"><span>我的行程</span><small>意向、成行、预订，都在同一处</small></div>';
+ if(!plans.length)return html+'<div class="book-empty">还没有约好下一场。<br>先收藏这一刻，也可以慢慢决定。</div>';
+ plans.forEach(function(p){
+  var e=p.event||ev(p.eventId),label=p.type==='group'?(p.state==='DONE'?'原组 · 已完成':p.privateOnly?'原组 · 本人回应已保留':p.state==='CONFIRMED'?'原组 · 已成行':p.state==='BELOW_MIN'?'原组 · 待主理人处理':p.state==='CANCELLED'?'原组 · 已取消':p.state==='EXPIRED'?'原组 · 已归档':'原组 · 已私下回应'):(p.attended?'已签到 · 新纪念已收下':'活动 · 已预订');
+  html+='<article class="plan-entry" data-plan="'+p.id+'"><span class="past-label">'+label+'</span><h3>'+esc(e.title)+'</h3><p>'+fmt(e.date,true)+'<br>'+esc(e.place)+'</p><button class="btn secondary full" data-action="'+(p.attended?'open-envelope':p.type==='group'?'group-detail':'plan-detail')+'" data-invite="'+(p.invitationId||'')+'" data-event="'+e.id+'">'+(p.attended?'打开活动信封':'查看行程详情')+icon('arrow')+'</button></article>';
+ });
+ return html;
+}
+function collectionPage(){
+ var s=state(),html='<section id="page-collection" aria-labelledby="page-title"><p class="eyebrow">来过的、约好的 · 都好好收下</p><h1 id="page-title" tabindex="-1">我的 Encore。</h1><p class="intro">每次相见，多留一枚邮票。<br>翻开纪念，也能找到下一次约定。</p>';
+ if(openedEvent&&s.attended.some(e=>e.id===openedEvent)){
+  var event=ev(openedEvent),ws=works(event.id),d=draft(event.id);
+  html+='<div class="open-heading"><span>'+esc(event.title)+' · 已拆开</span><button class="text-btn" data-action="close-envelope">收回信封</button></div>';
+  if(!ws.length)html+='<p class="empty-note">这一页，还等着你留下自己的邮票。</p>';
+  ws.forEach(function(w){html+='<div class="saved-work" data-work="'+w.id+'">'+memory(w,event)+'<div class="work-meta"><span>'+artNames[w.source]+' · '+(w.scope==='group'?'已寄给这次同行的人':'私藏 · 仅自己可见')+'</span><button class="text-btn" data-action="share" data-work="'+w.id+'">'+icon('mail')+'寄出</button></div></div>';});
+  if(d.dirty||!ws.length)html+='<div class="draft">'+icon('stamp')+'<div><p>'+(d.source?'没做完的草稿，也在这里。':'给这段相见，留一枚邮票。')+'</p><small>自动保存 · 仅自己可见</small></div><button class="text-btn" data-action="edit-event" data-event="'+event.id+'">'+(d.source?'继续制作':'开始制作')+'</button></div>';
+  html+='<div class="return-link"><p>回忆先收好，下一次慢慢选。</p><button class="btn secondary full" data-action="nav" data-screen="next">看看我的下一次相见'+icon('arrow')+'</button></div>';
+ }else{
+  var progress=Number(s.progress)||0;
+  html+='<div class="series-goal"><div class="goal-top"><span>集满 4 枚，送一套印刷明信片</span><strong>'+progress+'<small> / 4</small></strong></div><div class="goal-track">'+[1,2,3,4].map(i=>'<i class="'+(i<=progress?'filled':'')+'"></i>').join('')+'</div></div>';
+  if(s.works.length>1)html+='<div class="collection-stamps">'+s.attended.map(function(e){var w=works(e.id)[0];return w?'<figure><div class="collected-stamp">'+stamp(w.source)+'</div><figcaption>'+esc(e.title)+'</figcaption></figure>':'';}).join('')+'</div>';
+  html+='<div class="section-label"><span>纪念与草稿</span><small>一场活动，一封来信</small></div>';s.attended.forEach(e=>html+=envelope(e));html+=planRows()+'<button class="btn secondary full" data-action="nav" data-screen="next">看看我的下一次相见'+icon('arrow')+'</button>';
+ }
+ var latest=s.invitations.find(i=>i.state==='DONE'&&!i.nextSentAt&&yes(i)&&Date.parse(s.now)-Date.parse(i.doneAt)>=86400000);
+ if(latest)html+='<p class="permission-note">主理人还没寄出下一封信。你也可以接着邀请。</p><button class="text-btn full" data-action="send-next" data-invite="'+latest.id+'">给同行的人写下一封邀请</button>';
+ return html+'</section>';
+}
+function localInput(iso){var p={};new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date(iso)).forEach(x=>p[x.type]=x.value);return p.year+'-'+p.month+'-'+p.day+'T'+p.hour+':'+p.minute}
+function inviteForm(i,kind){
+ var date=new Date(Math.max(Date.parse(state().now),Date.parse(i.date))+604800000).toISOString(),deadline=new Date(Date.parse(date)-345600000).toISOString();
+ return '<form id="invite-form" data-kind="'+kind+'" data-invite="'+i.id+'" class="host-form"><label class="field"><span>活动形式</span><select name="kind" class="presenter-select"><option value="dinner">晚餐</option><option value="walk">城市漫步</option></select></label><label class="field"><span>邀请的名字</span><input name="title" value="原组再聚 · 下一段相见" maxlength="40" required></label><label class="field"><span>活动时间 · 上海时间</span><input name="date" type="datetime-local" value="'+localInput(date)+'" required></label><label class="field"><span>集合地点</span><input name="place" value="'+esc(i.place)+'" maxlength="60" required></label><label class="field"><span>回复截止 · 上海时间</span><input name="deadline" type="datetime-local" value="'+localInput(deadline)+'" required></label><button class="btn full" type="submit">'+(kind==='reschedule'?'重新收集私下确认':'寄出下一封邀请')+icon('mail')+'</button></form>';
+}
+function hostPage(){
+ var i=inv(),html='<section id="host-view"><div class="host-banner">主理人视角 · 阿宁　/　演示数据</div><p class="eyebrow">Encore · 给相见一个下一次</p><h1 id="page-title" tabindex="-1">下一封信，<br>从你这里出发。</h1><p class="intro">'+esc(i.title)+'<br>'+fmt(i.date,true)+' · '+esc(i.place)+'</p><div class="host-status">';
+ if(['OPEN','REOPENED','EXPIRED'].includes(i.state))html+='<h3>等待中</h3><p>确认前，不展示个人回应或进度人数。</p>';
+ else if(['CONFIRMED','DONE'].includes(i.state))html+='<h3>'+(i.state==='DONE'?'已完成本次活动':'已成行')+'</h3><p>'+i.confirmedIds.map(person).map(esc).join('、')+'</p>';
+ else html+='<h3>'+(i.state==='BELOW_MIN'?'需要重新安排':'已取消本次行程')+'</h3><p>保留每个人自己的选择，再决定下一次。</p>';
+ html+='</div>';
+ if(i.state==='BELOW_MIN')html+='<div class="modal-actions"><button class="btn" data-action="reschedule" data-invite="'+i.id+'">换个日期，重新邀请</button><button class="btn secondary" data-action="cancel-group" data-invite="'+i.id+'">取消本次行程</button></div>';
+ if(i.state==='DONE'&&!i.nextSentAt)html+='<span class="yellow-tag">下一次，可以换一种活动</span>'+inviteForm(i,'next');
+ return html+'</section>';
+}
+function chrome(){
+ var s=state(),host=s.view==='host';$('#storage-warning').hidden=s.storageAvailable&&!s.storageWarning;if(s.storageWarning)$('#storage-warning').textContent=s.storageWarning;$('#identity').textContent=host?'主理人 · 阿宁':'参与者 · 林夏';$('#view-toggle').textContent=host?'回到我的 Encore ↗':'主理人视角 ↗';$('#nav').hidden=host;$('#clock-label').textContent=fmt(s.now,true)+' · 上海时间';$$('#nav button').forEach(b=>{if(b.dataset.screen===s.screen)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+ var r=!host&&s.preferences.format!=='pause'&&s.reminders.find(function(r){
+  if(r.dismissed)return false;
+  if(r.kind==='group'){var i=inv(r.invitationId);return i&&['OPEN','REOPENED','CONFIRMED'].includes(i.state)&&!yes(i)&&!conflict(i)&&Date.parse(s.now)<Date.parse(i.deadline);}
+  return s.suggestion.kind==='event'&&s.suggestion.eventId===r.eventId&&!s.bookings.some(b=>b.eventId===r.eventId);
+ });$('#reminder').hidden=!r;if(r)$('#reminder').innerHTML='<strong>'+esc(r.text)+'</strong><button class="text-btn" data-action="reminder" data-reminder="'+r.id+'">打开这次相见 '+icon('arrow')+'</button><button class="dismiss" data-action="dismiss-reminder" data-reminder="'+r.id+'" aria-label="收起私人提醒">×</button>';
+}
+function render(){
+ chrome();var s=state(),active=inv();if(s.view==='host'||!active||active.state!=='CONFIRMED'||!visibleConfirmed(active)){clearTimeout(sealTimer);$('#confirmation').hidden=true;}$('#main').innerHTML=s.view==='host'?hostPage():s.screen==='close'?closePage():s.screen==='next'?nextPage():collectionPage();if($('#presenter').open)presenter();if($('#modal').open&&modalState)renderModal();fit();
+ s.invitations.forEach(function(i){if(prevStates[i.id]&&prevStates[i.id]!=='CONFIRMED'&&i.state==='CONFIRMED'&&yes(i)&&!conflict(i)&&!pendingSeals.includes(i.id))pendingSeals.push(i.id);prevStates[i.id]=i.state});playSeal();
+}
+function playSeal(){if(state().view==='host'||$('#modal').open||$('#presenter').open)return;while(pendingSeals.length){var i=inv(pendingSeals.shift());if(!i||i.state!=='CONFIRMED'||!visibleConfirmed(i))continue;clearTimeout(sealTimer);$('#confirmation').hidden=false;sealTimer=setTimeout(()=>$('#confirmation').hidden=true,1800);break}}
+function nav(screen,eventId){if(busy)return;var r=act('NAV',{screen:screen,eventId:eventId});if(r.ok){scrollTo({top:0,behavior:'instant'});if($('#page-title'))$('#page-title').focus({preventScroll:true})}}
+function openEnvelope(id){openedEvent=id;nav('collection',id)}
+function top(title){return '<div class="modal-top"><span>Encore · 演示数据 Demo data</span><button class="close" data-action="close-modal" aria-label="关闭">×</button></div><h2 id="modal-title">'+title+'</h2>'}
+function renderModal(){
+ var s=state(),html='',bookingOpen=Date.parse(s.now)>=Date.parse(s.earlyWindow.startsAt);
+ if(modalState.type==='exclusions')html=top('下一次，想避开谁？')+'<p class="modal-intro">选择仅用于未来分组和座位，不会向任何人展示。</p>'+privatePeople('exclude')+'<p class="private-line">'+icon('lock')+'仅自己可见</p><button class="btn full" data-action="close-modal">保存私密选择</button>';
+ if(modalState.type==='group')html=top('我的原组约定')+groupCard(inv(modalState.invitationId),true);
+ if(modalState.type==='catalog')html=top('相见，还有这些形式。')+'<p class="modal-intro">这是你主动展开的活动目录，按社交强度排列。</p>'+s.events.slice().sort((a,b)=>({low:0,medium:1,high:2}[a.intensity]-{low:0,medium:1,high:2}[b.intensity])).map(function(e){var booked=s.bookings.some(b=>b.eventId===e.id);return '<article class="catalog-item"><h3>'+esc(e.title)+'</h3>'+intensity(e)+'<p>'+fmt(e.date,true)+'<br>'+esc(e.place)+'</p><button class="btn secondary full" data-action="book" data-event="'+e.id+'" '+(!booked&&!bookingOpen?'disabled':'')+'>'+(booked?'查看我的行程':bookingOpen?'订这一场':'11月16日12:00开放')+(booked||bookingOpen?icon('arrow'):'')+'</button></article>';}).join('');
+ if(modalState.type==='interest')html=top(modalState.group?'和原组，换一种相见。':'把兴趣，先收好。')+'<p class="modal-intro">仅保留你想参加的主题。不做日期承诺，也不要求现在报名。</p><div class="interest-topics">'+topics.map(t=>'<button data-action="topic" data-topic="'+t+'" aria-pressed="'+modalState.themes.includes(t)+'">'+t+'</button>').join('')+'</div><button class="btn full" data-action="save-interest" '+(!modalState.themes.length?'disabled':'')+'>私下收好这些想法</button>';
+ if(modalState.type==='plan'){var e=ev(modalState.eventId);html=top(esc(e.title))+'<span class="yellow-tag">我的行程 · 已预订</span><div class="modal-detail">'+details(e)+intensity(e)+'</div><p class="modal-intro">座位与分组遵循你的私密选择。到场签到后，会添一封新的活动纪念。</p><button class="btn full" data-action="close-modal">收好我的行程</button>'}
+ if(modalState.type==='share'){var w=s.works.find(w=>w.id===modalState.workId),e=ev(w.eventId),group=modalState.destination==='group';html=top('这张纪念，寄给谁？')+'<div class="share-options"><button data-action="share-destination" data-destination="self" aria-pressed="'+!group+'">只留给自己</button><button data-action="share-destination" data-destination="group" aria-pressed="'+group+'">寄给这次同行的人</button></div><div class="audience-preview"><strong>'+(group?'仅「'+esc(e.title)+'」已同行的人（含你）可见':'仅自己可见')+'</strong><br>只包含下方明信片、邮票和留言，不包含草稿或私下回应。</div><div class="share-preview">'+memory(w,e)+'</div><button class="btn full" style="margin-top:18px" data-action="send-work" data-work="'+w.id+'">确认这个范围</button>'}
+ if(modalState.type==='send'||modalState.type==='reschedule')html=top(modalState.type==='send'?'写给下一次相见。':'换个日期，重新约。')+'<p class="modal-intro">新的日期需要新的确认，每个人都可以自己决定。</p>'+inviteForm(inv(modalState.invitationId),modalState.type==='send'?'next':'reschedule');
+ if(modalState.type==='reset')html=top('从第一枚邮票开始？')+'<p class="reset-warning">会清空 Encore 的纪念、意向、行程与模拟时间，其他 Demo 不受影响。</p><div class="modal-actions"><button id="confirm-reset" class="btn" data-action="reset">清空并重新演示</button><button class="btn secondary" data-action="close-modal">保留我的 Encore</button></div>';
+ $('#modal-content').innerHTML=html;fit();
+}
+function openModal(type,options){modalState=Object.assign({type:type},options||{});renderModal();if(!$('#modal').open)$('#modal').showModal();fit()}
+function closeModal(){$('#modal').close();modalState=null;playSeal()}
+function presenter(){
+ var s=state(),i=inv(),p=s.preferences;
+ var html='<div class="modal-top"><span>仅演示者可见</span><button class="close" data-action="close-presenter" aria-label="关闭演示控制">×</button></div><h2 id="presenter-title">同一产品，不同的下一次。</h2><p class="modal-intro">切换私密意向、模拟时间和回应，检查不同的下一次。</p><div class="presenter-now"><small>模拟现在 · 上海时间</small>'+fmt(s.now,true)+'</div><div class="clock-presets">'+[['day0','散场时刻'],['day2','第 2 天 · 回访'],['groupReminder','原组私人提醒'],['deadline','原组回复截止后'],['meeting','原组活动时间'],['day7','第 7 天'],['day30','第 30 天'],['attendance','跳到预订活动时间'],['after24h','完成后 24 小时']].map(a=>'<button data-action="clock" data-preset="'+a[0]+'">'+a[1]+'</button>').join('')+'</div><p class="drawer-label">形式意向</p>'+choiceRows('format',true)+'<p class="drawer-label">关系意向</p>'+choiceRows('company',true)+'<p class="drawer-label">想再见的人 · 本人私密意向</p>'+privatePeople('see-again')+'<button class="private-person full" style="margin-top:12px" data-action="mutual" aria-pressed="'+!!s.mutualResponses.zhoumo+'"><span>周默也选择想再见林夏</span><span class="selection">'+(s.mutualResponses.zhoumo?'✓':'')+'</span></button><p class="drawer-label">私密排除</p>'+privatePeople('exclude')+'<p class="drawer-label">原组邀请形式 · 改动后重新确认</p><div class="share-options"><button data-action="invite-format" data-kind="dinner" aria-pressed="'+(i.kind==='dinner')+'">原组晚餐</button><button data-action="invite-format" data-kind="walk" aria-pressed="'+(i.kind==='walk')+'">原组漫步</button></div><p class="drawer-label">模拟其他人的原组回应 · 仅工具可见</p>';
+ people.filter(p=>p.id!==ME&&i.eligibleIds.includes(p.id)).forEach(p=>{html+='<div class="sim-person"><span>'+p.name+'</span><button data-action="sim-yes" data-person="'+p.id+'">确认参加</button><button data-action="sim-withdraw" data-person="'+p.id+'">撤回</button></div>'});
+ html+='<button class="btn full" style="margin-top:18px" data-action="scan-group" data-invite="'+i.id+'" '+(!visibleConfirmed(i)||i.state!=='CONFIRMED'||Date.parse(s.now)<Date.parse(i.date)?'disabled':'')+'>'+icon('scan')+'模拟原组活动签到</button>';
+ s.bookings.filter(b=>!b.attended).forEach(b=>{var e=ev(b.eventId);html+='<div class="attendance-choice"><span>'+esc(e.title)+'</span><button data-action="scan-event" data-event="'+e.id+'" '+(Date.parse(s.now)<Date.parse(e.date)?'disabled':'')+'>模拟签到</button></div>'});
+ html+='<button class="text-btn full" data-action="reset-preview">重置演示</button><p class="private-line">演示数据 Demo data · 无真实消息或预订</p>';$('#presenter-content').innerHTML=html;
+}
+function changePeople(kind,id){var p=state().preferences,list=(kind==='see-again'?p.seeAgain:p.excluded).slice();list=list.includes(id)?list.filter(x=>x!==id):list.concat(id);act(kind==='see-again'?'SEE_AGAIN':'EXCLUDE',{ids:list});if(conflict(inv()))$('#confirmation').hidden=true}
+document.addEventListener('input',function(e){if(e.target.id!=='note')return;var text=Array.from(e.target.value).slice(0,60).join('');e.target.value=text;act('NOTE',{eventId:state().activeEventId,note:text},true);$('#note-count').textContent=Array.from(text).length;$('#draft-state').textContent=state().storageAvailable?'草稿已自动保存':'草稿暂存在本页内存';var n=$('#studio-postcard .memory-note');n.textContent=text||'把这一刻的一句话，留在这里。';n.classList.toggle('empty',!text);fit()});
+document.addEventListener('submit',function(e){if(e.target.id!=='invite-form')return;e.preventDefault();var f=e.target,d=new FormData(f),p={invitationId:f.dataset.invite,kind:d.get('kind'),title:d.get('title'),date:d.get('date')+':00+08:00',deadline:d.get('deadline')+':00+08:00',place:d.get('place')};if(!f.reportValidity())return;var r=act(f.dataset.kind==='reschedule'?'HOST_RESCHEDULE':'SEND_NEXT',p);if(r.ok){if($('#modal').open)closeModal();toast('下一封邀请已准备好，等待新的私下确认。')}});
+document.addEventListener('click',function(e){
+ var b=e.target.closest('[data-action]');if(!b||b.disabled||busy)return;var a=b.dataset.action;
+ if(a==='nav'){openedEvent=null;nav(b.dataset.screen);return}
+ if(a==='change-intent'){nav('close','dinner12');setTimeout(()=>$('#return-intent')&&$('#return-intent').scrollIntoView({behavior:'smooth'}),40);return}
+ if(a==='select'){if(draft().source!==b.dataset.source)act('SELECT',{source:b.dataset.source});return}
+ if(a==='stamp'){makeStamp();return}
+ if(a==='save'){var r=act('SAVE',{});if(r.ok){toast('这一场已收好，下一次按你的心意。');if($('#return-intent'))$('#return-intent').scrollIntoView({behavior:'smooth'})}return}
+ if(a==='preference'){var p={};p[b.dataset.field]=b.dataset.value;act('PREF',p);return}
+ if(a==='see-again'||a==='exclude'){changePeople(a,b.dataset.person);return}
+ if(a==='exclusions'){openModal('exclusions');return}
+ if(a==='rsvp'){var r=act('RSVP',{invitationId:b.dataset.invite,yes:true});if(r.ok)toast('已私下回应，成行后在这里告诉你。');return}
+ if(a==='withdraw'){var r=act('RSVP',{invitationId:b.dataset.invite,yes:false});if(r.ok)toast('已撤回我的回应。');return}
+ if(a==='keep-group'||a==='keep-event'){var r=act('KEEP',{kind:a==='keep-group'?'group':'event',invitationId:b.dataset.invite,eventId:b.dataset.event});if(r.ok){nav('collection');toast('已收好这次相见，想好后再回来。')}return}
+ if(a==='book'){var r=act('BOOK',{eventId:b.dataset.event});if(r.ok){if($('#modal').open)closeModal();openedEvent=null;nav('collection');toast('已加入我的 Encore 行程。')}return}
+ if(a==='catalog'){openModal('catalog');return}
+ if(a==='open-envelope'){if($('#modal').open)closeModal();openEnvelope(b.dataset.event);return}
+ if(a==='close-envelope'){var id=openedEvent;openedEvent=null;render();var el=$('.envelope[data-event="'+id+'"]');if(el)el.focus({preventScroll:true});return}
+ if(a==='edit-event'){nav('close',b.dataset.event);return}
+ if(a==='group-detail'){openModal('group',{invitationId:b.dataset.invite});return}
+ if(a==='plan-detail'){openModal('plan',{eventId:b.dataset.event});return}
+ if(a==='share'){openModal('share',{workId:b.dataset.work,destination:'self'});return}
+ if(a==='share-destination'){modalState.destination=b.dataset.destination;renderModal();return}
+ if(a==='send-work'){act('SHARE',{workId:b.dataset.work,destination:modalState.destination});closeModal();toast('已按选择的范围保留这张纪念。');return}
+ if(a==='interest'){openModal('interest',{group:b.dataset.group==='true',themes:Array.from(new Set(state().interest.map(i=>i.theme)))});return}
+ if(a==='topic'){var t=b.dataset.topic;modalState.themes=modalState.themes.includes(t)?modalState.themes.filter(x=>x!==t):modalState.themes.concat(t);renderModal();return}
+ if(a==='save-interest'){var r=act('INTEREST',{themes:modalState.themes});if(r.ok){closeModal();toast('已私下收好你的想法。')}return}
+ if(a==='presenter'){presenter();$('#presenter').showModal();return}
+ if(a==='close-presenter'){$('#presenter').close();playSeal();return}
+ if(a==='close-modal'){closeModal();return}
+ if(a==='clock'){var r=act('CLOCK',{now:b.dataset.preset});if(r.ok&&b.dataset.preset!=='attendance'&&b.dataset.preset!=='after24h'&&b.dataset.preset!=='day0')nav('next');return}
+ if(a==='sim-yes'||a==='sim-withdraw'){act('RSVP',{personId:b.dataset.person,yes:a==='sim-yes'});return}
+ if(a==='mutual'){act('MUTUAL',{personId:'zhoumo',yes:!state().mutualResponses.zhoumo});return}
+ if(a==='invite-format'){act('INVITE_FORMAT',{kind:b.dataset.kind});return}
+ if(a==='scan-group'||a==='scan-event'){var r=act('SCAN',{kind:a==='scan-group'?'group':'event',invitationId:b.dataset.invite,eventId:b.dataset.event});if(r.ok){if($('#modal').open)closeModal();$('#presenter').close();openedEvent=null;nav('collection');toast('签到成功，新的一场也有了自己的纪念。')}return}
+ if(a==='toggle-view'){act('VIEW',{view:state().view==='host'?'guest':'host'});scrollTo({top:0,behavior:'instant'});return}
+ if(a==='send-next'||a==='reschedule'){openModal(a==='send-next'?'send':'reschedule',{invitationId:b.dataset.invite});return}
+ if(a==='cancel-group'){act('HOST_CANCEL',{invitationId:b.dataset.invite});return}
+ if(a==='reminder'){act('DISMISS_REMINDER',{id:b.dataset.reminder});nav('next');return}
+ if(a==='dismiss-reminder'){act('DISMISS_REMINDER',{id:b.dataset.reminder});return}
+ if(a==='reset-preview'){$('#presenter').close();openModal('reset');return}
+ if(a==='reset'){openedEvent=null;modalState=null;pendingSeals=[];prevStates={};$('#modal').close();$('#presenter').close();$('#confirmation').hidden=true;act('RESET');scrollTo({top:0,behavior:'instant'});toast('Encore 已重新开始。');return}
+});
+$('#modal').addEventListener('close',function(){modalState=null;playSeal()});$('#presenter').addEventListener('close',playSeal);
+[$('#modal'),$('#presenter')].forEach(d=>d.addEventListener('click',function(e){if(e.target!==d)return;var r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom){if(d.id==='modal')closeModal();else d.close()}}));
+E.subscribe(()=>{if(!suppress)render()});state().invitations.forEach(i=>prevStates[i.id]=i.state);render();
+})();
+
+</script></body></html>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Piko 刘咏乐 | 产品经理实习求职作品集</title>
-<meta name="description" content="刘咏乐 Piko，社会工作硕士在读，寻找上海产品经理实习机会。了解我的教育背景、社工实习和手账游戏设计项目。">
+<title>Piko Yongle Liu | 个人作品集</title>
+<meta name="description" content="Piko Yongle Liu 的个人作品集，展示实习与市集运营实践、白日梦手作房游戏原型和 Encore 活动回访产品设计。">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="icon" type="image/svg+xml" href="assets/gacha-machine.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,7 +73,9 @@ em{font-style:italic}
 .hero h1{margin:0;font-size:clamp(54px,8.4vw,124px);line-height:1.12;letter-spacing:-.02em}
 .hero h1 em{color:var(--accent)}
 .hero-motto-en{margin:22px 0 0;max-width:520px;font-family:var(--f-display);font-style:italic;font-size:clamp(22px,2.4vw,30px);line-height:1.3;color:var(--accent)}
-.hero-lede{margin:0;max-width:520px;font-size:19px;color:var(--body)}
+.hero-email{display:inline-flex;align-self:flex-start;align-items:center;flex-wrap:wrap;gap:4px 10px;max-width:100%;padding:14px 20px;border:2px solid #075A98;border-radius:16px;background:#FFF1AD;color:#075A98;font-family:var(--f-body);font-size:clamp(20px,2.1vw,28px);font-weight:700;line-height:1.5;text-decoration:none;transition:background-color .2s}
+.hero-email:hover{background:#FFE69A}
+.hero-email-address{min-width:0;overflow-wrap:anywhere}
 .hero-art{flex:1 1 340px;min-width:0;display:flex;justify-content:center}
 .gacha{width:390px;max-width:100%;text-align:center;--gacha-blue:#075A98;--gacha-fast:180ms;--gacha-turn-time:540ms;--gacha-roll-time:940ms;--gacha-ease:cubic-bezier(.22,.68,.32,1)}
 .gacha-kicker{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 0 4px;font-size:11px;letter-spacing:.14em;color:var(--gacha-blue)}
@@ -141,6 +143,7 @@ section.block .wrap{padding-block:120px;display:flex;flex-direction:column;gap:5
 .row{display:flex;flex-wrap:wrap;gap:24px}
 .card{background:var(--card);border:1px solid var(--hair);border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:24px}
 .skills{flex:1 1 320px;min-width:0}
+.skill-card-title{margin:0;font-size:13px;letter-spacing:.08em}
 .chips{display:flex;flex-wrap:wrap;gap:10px}
 .chip{border:1px solid var(--hair2);border-radius:999px;padding:8px 16px;font-size:15px;transition:background-color .25s,color .25s,border-color .25s,transform .25s}
 .chip:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);transform:translateY(-2px)}
@@ -151,24 +154,9 @@ section.block .wrap{padding-block:120px;display:flex;flex-direction:column;gap:5
 .story strong{display:block;font-family:var(--f-display);font-style:italic;font-weight:400;font-size:36px;line-height:1.1;color:var(--high)}
 .story p{margin:6px 0 0;color:var(--navymuted)}
 
-/* education */
-.edu{background:var(--panel);border-block:1px solid var(--hair)}
-.edu .num{color:var(--hair2)}
-.edu-row{display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start}
-.edu-side{flex:1 1 260px;min-width:0;display:flex;flex-direction:column;gap:16px}
-.edu-side p{margin:0;color:var(--body)}
-.tabs{display:flex;gap:4px;background:var(--paper);border:1px solid var(--hair);border-radius:999px;padding:4px;width:max-content;max-width:100%}
-.tab{border:0;background:transparent;color:var(--ink)}
-.tab[aria-selected="true"]{background:var(--ink);color:var(--paper)}
-.edu-card{flex:999 1 520px;min-width:0;position:relative;overflow:hidden;background:var(--card);border:1px solid var(--ink);border-radius:20px;padding:44px;display:flex;flex-direction:column;gap:14px}
-.edu-card .blob{position:absolute;right:-70px;top:-70px;width:220px;height:220px;border-radius:50%;background:var(--high)}
-.edu-card > *:not(.blob){position:relative}
-.edu-card h3{margin:0;font-size:clamp(34px,4vw,52px);line-height:1.05}
-.edu-card .deg{margin:0;font-weight:600;font-size:18px}
-.edu-card .det{margin:0;color:var(--body);max-width:560px}
-.edu-card .yrs{font-size:13px;letter-spacing:.08em}
-
 /* experience */
+.practice{background:var(--panel);border-block:1px solid var(--hair)}
+.practice .num{color:var(--hair2)}
 .jobs{display:flex;flex-direction:column;gap:14px}
 .job{border-radius:20px;background:var(--card);color:var(--ink);border:1px solid var(--hair);transition:background-color .4s,color .4s,border-color .4s,transform .45s,box-shadow .45s}
 .job.open{background:var(--navy);color:var(--navytext);border-color:var(--navy)}
@@ -225,27 +213,17 @@ section.block .wrap{padding-block:120px;display:flex;flex-direction:column;gap:5
 .bubble{position:absolute;top:14%;background:var(--card);color:var(--ink);border:1px solid var(--ink);border-radius:14px 14px 14px 2px;padding:6px 14px;font-size:13px}
 .dash{animation:dash 1.4s linear infinite}
 
-/* contact */
-.contact .wrap{padding-block:120px}
-.cta{position:relative;overflow:hidden;background:var(--accent);color:var(--white);border-radius:32px;padding:clamp(40px,8vw,112px);display:flex;flex-wrap:wrap;gap:40px;align-items:end;justify-content:space-between}
-.cta .ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.35)}
-.cta-copy{position:relative;flex:999 1 440px;min-width:0;display:flex;flex-direction:column;gap:18px}
-.cta-copy .mono{color:var(--white);opacity:.9}
-.cta h2{margin:0;font-size:clamp(46px,6.5vw,96px);line-height:.98;letter-spacing:-.02em}
-.cta p{margin:0;font-size:19px;max-width:520px;opacity:.92}
-.cta-side{position:relative;flex:1 1 260px;min-width:0;display:flex;flex-direction:column;gap:14px}
-.email{display:block;background:var(--paper);color:var(--ink);border-radius:24px;padding:16px 24px;text-align:left;font-weight:500;text-decoration:none;overflow-wrap:anywhere;transition:transform .2s}
-.email:hover{transform:translateY(-2px)}
-.contact-label{display:block;margin-bottom:4px;font-size:11px;font-weight:400;color:var(--muted);letter-spacing:.08em}
-.socials{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:center}
 footer{border-top:1px solid var(--hair)}
 footer .wrap{padding-block:28px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 footer .mono{font-size:12px;letter-spacing:.08em}
 
 @media (max-width:600px){
-  section.block .wrap,.contact .wrap{padding-block:80px}
+  section.block .wrap{padding-block:80px}
+  .practice{scroll-margin-top:80px}
   .hero .wrap{padding-block:72px 64px}
-  .card,.persona,.edu-card{padding:28px}
+  .hero-email{padding:12px 16px}
+  .hero-email-prefix{flex-basis:100%}
+  .card,.persona{padding:28px}
   .job-btn{padding:24px}
   .job ul{padding:0 24px 28px 44px}
 }
@@ -260,15 +238,13 @@ footer .mono{font-size:12px;letter-spacing:.08em}
 <section class="hero dots" id="top">
   <div class="wrap">
     <div class="hero-copy">
-      <p class="mono rise" style="margin:0;display:flex;align-items:center;gap:12px"><span class="pulse" aria-hidden="true"></span><span data-i18n="heroAvailability">产品经理实习 · 工作意向地：上海</span></p>
       <div class="hero-heading rise d1">
         <h1 class="serif" lang="zh-CN">好奇心是<br>世界的<em>火焰</em></h1>
         <p class="hero-motto-en" lang="en">Curiosity is the flame of the world.</p>
       </div>
-      <p class="hero-lede rise d2" data-i18n="heroLede">你好，我是刘咏乐 Piko，社会工作专业硕士在读，正在寻找上海的产品经理实习机会。</p>
+      <a class="hero-email rise d2" id="hero-email" href="mailto:svt04061107@126.com" lang="en"><span class="hero-email-prefix">Contact:</span><span class="hero-email-address">svt04061107@126.com</span><span aria-hidden="true">↗</span></a>
       <div class="rise d3" style="display:flex;flex-wrap:wrap;gap:12px">
         <a class="btn btn-ink" href="#portfolio" data-i18n="seeWork">查看我的实践 →</a>
-        <a class="btn btn-line" href="#contact" data-i18n="letsTalk">联系我</a>
       </div>
     </div>
     <div class="hero-art">
@@ -289,13 +265,12 @@ footer .mono{font-size:12px;letter-spacing:.08em}
 <!-- NAV -->
 <header class="nav">
   <nav class="wrap" aria-label="主导航" id="main-nav">
-    <a class="brand" href="#top"><i class="breathe" aria-hidden="true"></i>Piko <span lang="zh-CN">刘咏乐</span></a>
+    <a class="brand" href="#top"><i class="breathe" aria-hidden="true"></i><span lang="en">Piko Yongle Liu</span></a>
     <div class="links">
       <a class="ul" href="#about" data-i18n="navAbout">关于我</a>
-      <a class="ul" href="#education" data-i18n="navEducation">教育背景</a>
-      <a class="ul" href="#experience" data-i18n="navExperience">相关经历</a>
+      <a class="ul" href="#experience" data-i18n="navExperience">实习经历</a>
+      <a class="ul" href="#practice" data-i18n="navPractice">实践经历</a>
       <a class="ul" href="#portfolio" data-i18n="navPortfolio">项目实践</a>
-      <a class="btn say" href="#contact" data-i18n="navContact">联系我 ↗</a>
       <button class="language-toggle" id="language-toggle" type="button" aria-label="Switch to English" lang="en">English</button>
     </div>
   </nav>
@@ -306,53 +281,48 @@ footer .mono{font-size:12px;letter-spacing:.08em}
 <section class="block" id="about">
   <div class="wrap">
     <div class="head">
-      <div><span class="mono">Self-introduction</span><h2 class="serif">Nice to meet <em>you</em>.</h2></div>
+      <div><span class="mono" data-i18n="aboutLabel">关于我</span><h2 class="serif"><span data-i18n="aboutTitle">语言与</span><em data-i18n="aboutEmphasis">技能</em></h2></div>
       <span class="num" aria-hidden="true">01</span>
     </div>
-    <p class="intro"><strong>Piko</strong> · <span lang="zh-CN">刘咏乐</span>. [ONE-SENTENCE INTRO: who you are and what drives you].</p>
     <div class="row">
-      <div class="card skills lift">
-        <span class="mono" style="font-size:12px">Skills</span>
+      <article class="card skills lift" aria-labelledby="language-skills-title">
+        <h3 class="mono skill-card-title" id="language-skills-title" data-i18n="languageSkills">语言</h3>
         <div class="chips">
-          <span class="chip">[SKILL 1]</span><span class="chip">[SKILL 2]</span><span class="chip">[SKILL 3]</span>
-          <span class="chip">[SKILL 4]</span><span class="chip">[SKILL 5]</span><span class="chip">[SKILL 6]</span>
+          <span class="chip" data-i18n="englishCET4">英语四级 · CET-4</span>
+          <span class="chip" data-i18n="englishCET6">英语六级 · CET-6</span>
         </div>
-      </div>
+      </article>
+      <article class="card skills lift" aria-labelledby="ai-skills-title">
+        <h3 class="mono skill-card-title" id="ai-skills-title" data-i18n="aiSkills">AI 工具</h3>
+        <div class="chips"><span class="chip" lang="en">Claude</span><span class="chip" lang="en">ChatGPT</span></div>
+      </article>
+      <article class="card skills lift" aria-labelledby="design-skills-title">
+        <h3 class="mono skill-card-title" id="design-skills-title" data-i18n="designSkills">设计工具</h3>
+        <div class="chips"><span class="chip" lang="en">Photoshop</span><span class="chip" lang="en">Figma</span><span class="chip" lang="en">Canva</span></div>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- 02 EDUCATION -->
-<section class="block edu" id="education">
-  <div class="wrap">
-    <div class="head">
-      <div><span class="mono" data-i18n="educationLabel">Education</span><h2 class="serif"><span data-i18n="educationTitle">在学习中，提出</span><em data-i18n="educationEmphasis">更好的问题</em><span data-i18n="educationEnd">。</span></h2></div>
-      <span class="num" aria-hidden="true">02</span>
-    </div>
-    <div class="edu-row">
-      <div class="edu-side">
-        <p data-i18n="educationIntro">社会工作硕士在读，本科主修经济学、辅修法学，具备经济学、管理与法律的跨学科知识基础。</p>
-        <div class="tabs" role="tablist" aria-label="学历" id="tabs"></div>
-      </div>
-      <div class="edu-card lift" role="tabpanel" id="edu-panel" aria-labelledby="edu-tab-0" tabindex="0">
-        <div class="blob breathe" aria-hidden="true"></div>
-        <span class="mono yrs" id="edu-years">硕士 · 2024.09 — 至今</span>
-        <h3 class="serif" id="edu-school">陕西师范大学</h3>
-        <p class="deg" id="edu-degree">社会工作 · 硕士在读</p>
-        <p class="det" id="edu-detail">研究训练：社会研究方法、定量研究、案例研究。校级三等奖学金；案例比赛省级奖项；教学案例国家级立项。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 03 EXPERIENCE -->
+<!-- 02 INTERNSHIPS -->
 <section class="block" id="experience">
   <div class="wrap">
     <div class="head">
-      <div><span class="mono" data-i18n="experienceLabel">Internships & campus experience</span><h2 class="serif"><span data-i18n="experienceTitle">在实践中，理解</span><em data-i18n="experienceEmphasis">人和需求</em><span data-i18n="experienceEnd">。</span></h2></div>
-      <span class="num" aria-hidden="true">03</span>
+      <div><span class="mono" data-i18n="experienceLabel">实习经历</span><h2 class="serif"><span data-i18n="experienceTitle">在实践中，理解</span><em data-i18n="experienceEmphasis">人和需求</em><span data-i18n="experienceEnd">。</span></h2></div>
+      <span class="num" aria-hidden="true">02</span>
     </div>
     <div class="jobs" id="jobs"></div>
+  </div>
+</section>
+
+<!-- 03 PRACTICAL EXPERIENCE -->
+<section class="block practice" id="practice">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="mono" data-i18n="practiceLabel">实践经历</span><h2 class="serif"><span data-i18n="practiceTitle">在真实场景中，</span><em data-i18n="practiceEmphasis">回应需求</em><span data-i18n="practiceEnd">。</span></h2></div>
+      <span class="num" aria-hidden="true">03</span>
+    </div>
+    <div class="jobs" id="practice-items"></div>
   </div>
 </section>
 
@@ -367,26 +337,8 @@ footer .mono{font-size:12px;letter-spacing:.08em}
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="wrap">
-    <div class="cta">
-      <div class="ring breathe" aria-hidden="true" style="right:-140px;bottom:-180px;width:460px;height:460px"></div>
-      <div class="ring breathe" aria-hidden="true" style="right:-70px;bottom:-110px;width:320px;height:320px;animation-delay:1.4s"></div>
-      <div class="cta-copy">
-        <span class="mono" data-i18n="contactLabel">Contact</span>
-        <h2 class="serif"><span data-i18n="contactTitle">有个机会，</span><em data-i18n="contactEmphasis">一起聊聊？</em></h2>
-        <p data-i18n="contactIntro">我是刘咏乐 Piko，正在寻找上海的产品经理实习机会。欢迎通过邮箱联系我。</p>
-      </div>
-      <div class="cta-side">
-        <a class="email" href="mailto:svt04061107@126.com"><span class="contact-label" data-i18n="emailLabel">邮箱 ↗</span><span>svt04061107@126.com</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer>
-  <div class="wrap"><span class="mono">© 2026 Piko · <span lang="zh-CN">刘咏乐</span></span><span class="mono" data-i18n="footerNote">保持好奇，继续行动。</span></div>
+  <div class="wrap"><span class="mono" lang="en">© 2026 Piko Yongle Liu</span><span class="mono" data-i18n="footerNote">保持好奇，继续行动。</span></div>
 </footer>
 
 <script>
@@ -450,7 +402,7 @@ footer .mono{font-size:12px;letter-spacing:.08em}
 })();
 
 </script>
-<script src="assets/profile-content.js"></script>
-<script src="assets/site.js"></script>
+<script src="assets/profile-content.js?v=3f6f2119b4c9"></script>
+<script src="assets/site.js?v=f6782ecb7767"></script>
 </body>
 </html>
